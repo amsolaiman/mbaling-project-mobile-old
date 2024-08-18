@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { router } from "expo-router";
 // theme

@@ -3,5 +3,10 @@ module.exports = function (api) {
   return {
     presets: ["babel-preset-expo"],
     plugins: ["react-native-iconify/plugin"],
+    env: {
+      production: {
+        plugins: ["react-native-paper/babel"],
+      },
+    },
   };
 };

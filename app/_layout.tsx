@@ -1,15 +1,26 @@
 import { useEffect } from "react";
 import {
+  Keyboard,
+  Platform,
+  StatusBar,
+  SafeAreaView,
+  TouchableWithoutFeedback,
+} from "react-native";
+import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
+import { MD3LightTheme as PaperTheme, PaperProvider } from "react-native-paper";
+import "react-native-reanimated";
+// @expo
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
-import "react-native-reanimated";
 // hooks
 import { useColorScheme } from "@/hooks/useColorScheme";
+// components
+import * as SplashScreen from "expo-splash-screen";
+import Colors from "@/theme/Colors";
 
 // ----------------------------------------------------------------------
 
@@ -20,7 +31,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "login",
+  initialRouteName: "index",
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -60,12 +71,33 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
+  const theme = {
+    ...PaperTheme,
+    colors: {
+      ...PaperTheme.colors,
+      primary: Colors.primary,
+      secondary: Colors[colorScheme === "dark" ? "dark" : "light"].text,
+    },
+  };
+
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(main)" options={{ headerShown: false }} />
-      </Stack>
+      <PaperProvider theme={theme}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <SafeAreaView
+            style={{
+              flex: 1,
+              paddingTop:
+                Platform.OS === "android" ? StatusBar.currentHeight : 0,
+            }}
+          >
+            <Stack>
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+              <Stack.Screen name="(main)" options={{ headerShown: false }} />
+            </Stack>
+          </SafeAreaView>
+        </TouchableWithoutFeedback>
+      </PaperProvider>
     </ThemeProvider>
   );
 }

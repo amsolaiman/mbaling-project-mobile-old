@@ -42,6 +42,7 @@ export default function MainLayout() {
         tabBarShowLabel: false,
         tabBarStyle: [styles.tabs, styles.tabsShadow],
         tabBarItemStyle: { display: tabItemsDisplay(route.name) },
+        tabBarHideOnKeyboard: true,
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),

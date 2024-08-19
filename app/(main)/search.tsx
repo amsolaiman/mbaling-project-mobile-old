@@ -14,19 +14,6 @@ export default function SearchScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Search</Text>
-
-      <IconButton
-        icon="camera"
-        iconColor={MD3Colors.error50}
-        size={20}
-        onPress={() => console.log("Pressed")}
-      />
-
-      <TextInput
-        label="Email"
-        value={text}
-        onChangeText={(text) => setText(text)}
-      />
     </View>
   );
 }

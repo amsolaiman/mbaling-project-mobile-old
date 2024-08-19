@@ -1,33 +1,90 @@
-import { useState } from "react";
-import { Pressable, StyleSheet } from "react-native";
+import * as Yup from "yup";
+import { useCallback, useMemo } from "react";
+import { useForm } from "react-hook-form";
+import { StyleSheet, Text } from "react-native";
+import { yupResolver } from "@hookform/resolvers/yup";
+// @expo
 import { router } from "expo-router";
+// @paper
+import { Button } from "react-native-paper";
 // theme
 import Fonts from "@/theme/Fonts";
 import Colors from "@/theme/Colors";
 // components
-import { Text, View } from "@/theme/Components";
+import FormProvider from "@/components/hook-form";
+import { View } from "@/theme/Components";
 import { LogoVertical } from "@/components/logo";
+//
+import LoginInputField from "../login-input-field";
 
 // ----------------------------------------------------------------------
 
-export default function LoginView() {
-  return (
-    <View style={styles.container}>
-      <LogoVertical disabledLink color="dark" style={{ marginBottom: 48 }} />
+type FormValuesProps = {
+  username: string;
+  password: string;
+};
 
-      <View style={{ borderRadius: 50, overflow: "hidden" }}>
-        <Pressable
-          onPress={() => router.navigate("/(main)/home")}
+export default function LoginView() {
+  const LoginSchema = Yup.object().shape({
+    username: Yup.string().required(),
+    password: Yup.string().required(),
+  });
+
+  const defaultValues = useMemo(
+    () => ({
+      username: "",
+      password: "",
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
+  const methods = useForm<FormValuesProps>({
+    resolver: yupResolver(LoginSchema),
+    defaultValues,
+  });
+
+  const {
+    reset,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = methods;
+
+  const onSubmit = useCallback(
+    async (data: FormValuesProps) => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        reset();
+        router.push("/(main)/home");
+        console.info("DATA", data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [reset, router]
+  );
+
+  return (
+    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+      <View style={styles.container}>
+        <LogoVertical disabledLink color="dark" style={styles.logo} />
+
+        <LoginInputField name="username" label="username" />
+
+        <LoginInputField name="password" label="password" secureTextEntry />
+
+        <Button
+          onPress={handleSubmit(onSubmit)}
           style={styles.button}
-          android_ripple={{
-            color: "rgba(0,0,0,0.05)",
-            borderless: false,
-          }}
+          //
+          buttonColor="#fff"
+          textColor={Colors.primary}
+          uppercase={false}
         >
-          <Text style={styles.title}>log-in</Text>
-        </Pressable>
+          <Text style={{ ...Fonts[600] }}>log-in</Text>
+        </Button>
       </View>
-    </View>
+    </FormProvider>
   );
 }
 
@@ -35,21 +92,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: "relative",
-    alignItems: "center",
     justifyContent: "center",
     backgroundColor: Colors.primary,
   },
-  button: {
-    width: 100,
-    height: 28,
-    display: "flex",
-    justifyContent: "center",
-    backgroundColor: "#fff",
+  logo: {
+    marginBottom: 48,
+    alignSelf: "center",
   },
-  title: {
-    color: Colors.primary,
-    textAlign: "center",
-    fontSize: 14,
-    ...Fonts[500],
+  button: {
+    marginTop: 20,
+    width: 120,
+    alignSelf: "center",
+    borderRadius: 50,
   },
 });

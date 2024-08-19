@@ -11,16 +11,23 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { MD3LightTheme as PaperTheme, PaperProvider } from "react-native-paper";
-import "react-native-reanimated";
+import {
+  MD2LightTheme as PaperTheme,
+  PaperProvider,
+  configureFonts,
+} from "react-native-paper";
 // @expo
-import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
+import { useFonts } from "expo-font";
 // hooks
 import { useColorScheme } from "@/hooks/useColorScheme";
+// theme
+import Colors from "@/theme/Colors";
 // components
 import * as SplashScreen from "expo-splash-screen";
-import Colors from "@/theme/Colors";
+// styles
+import "react-native-reanimated";
+import { fontConfig } from "@/theme/paper-font-config";
 
 // ----------------------------------------------------------------------
 
@@ -78,6 +85,7 @@ function RootLayoutNav() {
       primary: Colors.primary,
       secondary: Colors[colorScheme === "dark" ? "dark" : "light"].text,
     },
+    fonts: configureFonts({ config: fontConfig, isV3: false }),
   };
 
   return (
@@ -91,7 +99,7 @@ function RootLayoutNav() {
                 Platform.OS === "android" ? StatusBar.currentHeight : 0,
             }}
           >
-            <Stack>
+            <Stack initialRouteName="index">
               <Stack.Screen name="index" options={{ headerShown: false }} />
               <Stack.Screen name="(main)" options={{ headerShown: false }} />
             </Stack>

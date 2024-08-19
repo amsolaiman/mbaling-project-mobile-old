@@ -35,7 +35,7 @@ export default function MainLayout() {
 
   return (
     <Tabs
-      initialRouteName={paths.home}
+      initialRouteName={`(main)/${paths.home}`}
       screenOptions={({ route }) => ({
         tabBarActiveTintColor: Colors.primary,
         tabBarInactiveTintColor: Colors.primary,

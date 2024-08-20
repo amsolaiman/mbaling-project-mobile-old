@@ -20,7 +20,7 @@ import {
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 // hooks
-import { useColorScheme } from "@/hooks/useColorScheme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
 import Colors from "@/theme/Colors";
 // components

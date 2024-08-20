@@ -15,6 +15,7 @@ import FormProvider from "@/components/hook-form";
 import { View } from "@/theme/Components";
 import { LogoVertical } from "@/components/logo";
 //
+import LoginFootnote from "../login-footnote";
 import LoginInputField from "../login-input-field";
 
 // ----------------------------------------------------------------------
@@ -77,12 +78,17 @@ export default function LoginView() {
           onPress={handleSubmit(onSubmit)}
           style={styles.button}
           //
+          uppercase={false}
           buttonColor="#fff"
           textColor={Colors.primary}
-          uppercase={false}
+          labelStyle={{
+            marginVertical: 6,
+          }}
         >
           <Text style={{ ...Fonts[600] }}>log-in</Text>
         </Button>
+
+        <LoginFootnote />
       </View>
     </FormProvider>
   );
@@ -101,7 +107,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
-    width: 120,
+    width: 110,
     alignSelf: "center",
     borderRadius: 50,
   },

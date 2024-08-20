@@ -10,4 +10,10 @@ export default {
     text: "#fff",
     background: "#000",
   },
+  common: {
+    white: "#fff",
+    whiteVariant: "rgba(255, 255, 255, 0.6)",
+    black: "#000",
+    blackVariant: "rgba(0, 0, 0, 0.6)",
+  },
 };

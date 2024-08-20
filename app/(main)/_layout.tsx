@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 // routes
 import { paths } from "@/routes/paths";
 // hooks
-import { useClientOnlyValue } from "@/hooks/useClientOnlyValue";
+import { useClientOnlyValue } from "@/hooks/use-client-only-value";
 // theme
 import Colors from "@/theme/Colors";
 // assets

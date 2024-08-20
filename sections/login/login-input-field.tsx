@@ -1,7 +1,8 @@
-import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Controller, useFormContext } from "react-hook-form";
 import { TextInput, TextInputProps } from "react-native-paper";
+// hooks
+import { useBoolean } from "@/hooks/use-boolean";
 
 // ----------------------------------------------------------------------
 
@@ -12,7 +13,7 @@ interface Props extends TextInputProps {
 export default function LoginInputField({ name, label }: Props) {
   const { control } = useFormContext();
 
-  const [onFocus, setFocus] = useState<boolean>(false);
+  const onFocus = useBoolean(false);
 
   return (
     <Controller
@@ -26,15 +27,17 @@ export default function LoginInputField({ name, label }: Props) {
             onChangeText={field.onChange}
             style={styles.input}
             //
-            onFocus={() => setFocus(true)}
-            onBlur={() => setFocus(false)}
+            onFocus={onFocus.onTrue}
+            onBlur={onFocus.onFalse}
             //
             textColor="#fff"
             underlineColor="#fff"
             activeUnderlineColor="#fff"
           />
 
-          {!onFocus && !field.value && <Text style={styles.label}>{label}</Text>}
+          {!onFocus.value && !field.value && (
+            <Text style={styles.label}>{label}</Text>
+          )}
         </View>
       )}
     />
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   input: {
-    width: "70%",
+    width: "60%",
     height: 48,
     alignSelf: "center",
     textAlign: "center",

@@ -1,16 +1,18 @@
 import { FC } from "react";
 import { TouchableOpacity, View } from "react-native";
-import { router } from "expo-router";
 import Svg, { G, Path } from "react-native-svg";
+// @expo
+import { router } from "expo-router";
+// theme
+import Colors from "@/theme/Colors";
 // types
 import { LogoProps } from "./types";
-import Colors from "@/theme/Colors";
 
 // ----------------------------------------------------------------------
 
 const LogoVertical: FC<LogoProps> = ({
   disabledLink = false,
-  size = 85,
+  size = 90,
   color = "primary",
   style,
 }) => {

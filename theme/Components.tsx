@@ -3,9 +3,13 @@
  * https://docs.expo.io/guides/color-schemes/
  */
 
-import { Text as DefaultText, View as DefaultView } from "react-native";
+import {
+  Text as DefaultText,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 // hooks
-import { useColorScheme } from "@/hooks/useColorScheme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
 import Colors from "./Colors";
 
@@ -18,7 +22,7 @@ type ThemeProps = {
 
 export type TextProps = ThemeProps & DefaultText["props"];
 
-export type ViewProps = ThemeProps & DefaultView["props"];
+export type ViewProps = ThemeProps & KeyboardAvoidingView["props"];
 
 // ----------------------------------------------------------------------
 
@@ -55,18 +59,11 @@ export function View(props: ViewProps) {
     "background"
   );
 
-  return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={[{ backgroundColor }, style]}
+      {...otherProps}
+    />
+  );
 }
-
-// const getFontWeight = (style: TextStyle | undefined): string => {
-//   const isNumeric = (value: unknown): value is string => {
-//     return (
-//       typeof value === "number" ||
-//       (typeof value === "string" && !isNaN(Number(value)))
-//     );
-//   };
-
-//   const fontWeight = isNumeric(style?.fontWeight) ? style?.fontWeight : "400";
-
-//   return fontWeight;
-// };

@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#be282d"
-      }
+      },
+      "package": "com.mbaling.app"
     },
     "web": {
       "bundler": "metro",

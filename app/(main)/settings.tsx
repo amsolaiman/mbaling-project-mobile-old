@@ -1,9 +1,7 @@
 import { Pressable, StyleSheet } from "react-native";
 import { router } from "expo-router";
-// theme
-import Fonts from "@/theme/Fonts";
 // components
-import { Text, View } from "@/theme/Components";
+import { Text, View } from "@/components/custom-default";
 
 // ----------------------------------------------------------------------
 
@@ -11,7 +9,9 @@ export default function SettingsScreen() {
   return (
     <View style={styles.container}>
       <Pressable onPress={() => router.navigate("/")}>
-        <Text style={styles.title}>Settings</Text>
+        <Text font="400" style={styles.title}>
+          Settings
+        </Text>
       </Pressable>
     </View>
   );
@@ -25,6 +25,5 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 48,
-    ...Fonts[400],
   },
 });

@@ -1,4 +1,4 @@
-export const fontConfig = {
+export default {
   web: {
     regular: {
       fontFamily: "Metropolis400",

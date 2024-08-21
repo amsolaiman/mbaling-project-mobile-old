@@ -12,9 +12,9 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import {
-  MD2LightTheme as PaperTheme,
   PaperProvider,
   configureFonts,
+  MD2LightTheme as PaperTheme,
 } from "react-native-paper";
 // @expo
 import { Stack } from "expo-router";
@@ -23,11 +23,11 @@ import { useFonts } from "expo-font";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
 import Colors from "@/theme/Colors";
+import FontsConfig from "@/theme/FontsConfig";
 // components
 import * as SplashScreen from "expo-splash-screen";
 // styles
 import "react-native-reanimated";
-import { fontConfig } from "@/theme/paper-font-config";
 
 // ----------------------------------------------------------------------
 
@@ -85,7 +85,7 @@ function RootLayoutNav() {
       primary: Colors.primary,
       secondary: Colors[colorScheme === "dark" ? "dark" : "light"].text,
     },
-    fonts: configureFonts({ config: fontConfig, isV3: false }),
+    fonts: configureFonts({ config: FontsConfig, isV3: false }),
   };
 
   return (

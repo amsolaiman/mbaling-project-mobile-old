@@ -1,15 +1,15 @@
 import { StyleSheet } from "react-native";
-// theme
-import Fonts from "@/theme/Fonts";
 // components
-import { Text, View } from "@/theme/Components";
+import { Text, View } from "@/components/custom-default";
 
 // ----------------------------------------------------------------------
 
 export default function ManageScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Manage</Text>
+      <Text font="300" style={styles.title}>
+        Manage
+      </Text>
     </View>
   );
 }
@@ -22,6 +22,5 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 48,
-    ...Fonts[300],
   },
 });

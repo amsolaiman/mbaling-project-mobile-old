@@ -1,23 +1,21 @@
 import * as Yup from "yup";
 import { useCallback, useMemo } from "react";
-import { useForm } from "react-hook-form";
 import { StyleSheet, Text } from "react-native";
+import { Button } from "react-native-paper";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 // @expo
 import { router } from "expo-router";
-// @paper
-import { Button } from "react-native-paper";
 // theme
 import Fonts from "@/theme/Fonts";
 import Colors from "@/theme/Colors";
 // components
-import FormProvider from "@/components/hook-form";
-import { View } from "@/theme/Components";
 import { LogoVertical } from "@/components/logo";
+import { View } from "@/components/custom-default";
+import FormProvider from "@/components/hook-form";
 //
 import LoginFootnote from "../login-footnote";
 import LoginInputField from "../login-input-field";
-import SpinnerOverlay from "@/components/spinner-overlay";
 
 // ----------------------------------------------------------------------
 

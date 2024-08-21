@@ -1,11 +1,12 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import { Modal, Portal } from "react-native-paper";
+import { Pressable, StyleSheet, View, Text as DefaultText } from "react-native";
 import { Iconify } from "react-native-iconify";
 // hooks
 import { useBoolean } from "@/hooks/use-boolean";
 // theme
 import Fonts from "@/theme/Fonts";
 import Colors from "@/theme/Colors";
+// components
+import ConfirmDialog from "@/components/custom-dialog";
 
 // ----------------------------------------------------------------------
 
@@ -13,37 +14,32 @@ export default function LoginFootnote() {
   const open = useBoolean(false);
 
   return (
-    <View style={styles.container}>
-      <Pressable onPress={open.onTrue} style={styles.button}>
-        <Text style={styles.text}>Sign-up for an account</Text>
+    <>
+      <View style={styles.container}>
+        <Pressable onPress={open.onTrue} style={styles.button}>
+          <DefaultText style={styles.text}>Sign-up for an account</DefaultText>
 
-        <Iconify
-          icon="solar:question-circle-linear"
-          size={16}
-          color={Colors.common.white}
-        />
-      </Pressable>
+          <Iconify
+            icon="solar:question-circle-linear"
+            size={16}
+            color={Colors.common.white}
+          />
+        </Pressable>
+      </View>
 
-      <Portal>
-        <Modal
-          visible={open.value}
-          onDismiss={open.onFalse}
-          contentContainerStyle={styles.modal}
-        >
-          <Text style={{ ...Fonts[400] }}>
-            Please proceed to the MSU Housing Management Division to sign-up for
-            an account.
-          </Text>
-        </Modal>
-      </Portal>
-    </View>
+      <ConfirmDialog
+        open={open.value}
+        onClose={open.onFalse}
+        message="Please proceed to the MSU Housing Management Division to sign-up for an account."
+      />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    bottom: 20,
+    bottom: 24,
     left: 0,
     right: 0,
     alignItems: "center",
@@ -51,16 +47,11 @@ const styles = StyleSheet.create({
   button: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 2,
+    gap: 4,
   },
   text: {
     color: Colors.common.white,
     fontSize: 14,
     ...Fonts[400],
-  },
-  modal: {
-    padding: 20,
-    margin: 30,
-    backgroundColor: Colors.common.white,
   },
 });

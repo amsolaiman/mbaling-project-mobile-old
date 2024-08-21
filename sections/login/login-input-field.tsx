@@ -62,11 +62,14 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     textAlign: "center",
     backgroundColor: "transparent",
+    zIndex: 1,
   },
   label: {
     paddingBottom: 2,
     position: "absolute",
     color: "rgba(255,255,255,0.8)",
     fontSize: 16,
+    pointerEvents: "none",
+    zIndex: 0,
   },
 });

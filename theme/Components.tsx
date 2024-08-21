@@ -12,6 +12,8 @@ import {
 import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
 import Colors from "./Colors";
+// components
+import SpinnerOverlay from "@/components/spinner-overlay";
 
 // ----------------------------------------------------------------------
 
@@ -20,9 +22,16 @@ type ThemeProps = {
   darkColor?: string;
 };
 
+type SpinnerProps = {
+  loadingState?: boolean;
+  loadingCaption?: string;
+};
+
 export type TextProps = ThemeProps & DefaultText["props"];
 
-export type ViewProps = ThemeProps & KeyboardAvoidingView["props"];
+export type ViewProps = ThemeProps &
+  SpinnerProps &
+  KeyboardAvoidingView["props"];
 
 // ----------------------------------------------------------------------
 
@@ -52,7 +61,14 @@ export function Text(props: TextProps) {
 }
 
 export function View(props: ViewProps) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
+  const {
+    style,
+    lightColor,
+    darkColor,
+    loadingState = false,
+    loadingCaption,
+    ...otherProps
+  } = props;
 
   const backgroundColor = useThemeColor(
     { light: lightColor, dark: darkColor },
@@ -60,10 +76,14 @@ export function View(props: ViewProps) {
   );
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={[{ backgroundColor }, style]}
-      {...otherProps}
-    />
+    <>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={[{ backgroundColor }, style]}
+        {...otherProps}
+      />
+
+      <SpinnerOverlay state={loadingState} caption={loadingCaption} />
+    </>
   );
 }

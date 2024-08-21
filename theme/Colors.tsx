@@ -12,8 +12,8 @@ export default {
   },
   common: {
     white: "#fff",
-    whiteVariant: "rgba(255, 255, 255, 0.6)",
+    whiteVariant: "rgba(255, 255, 255, 0.5)",
     black: "#000",
-    blackVariant: "rgba(0, 0, 0, 0.6)",
+    blackVariant: "rgba(0, 0, 0, 0.5)",
   },
 };

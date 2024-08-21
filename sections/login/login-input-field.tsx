@@ -10,7 +10,11 @@ interface Props extends TextInputProps {
   name: string;
 }
 
-export default function LoginInputField({ name, label }: Props) {
+export default function LoginInputField({
+  name,
+  label,
+  secureTextEntry = false,
+}: Props) {
   const { control } = useFormContext();
 
   const onFocus = useBoolean(false);
@@ -25,6 +29,7 @@ export default function LoginInputField({ name, label }: Props) {
             {...field}
             value={field.value}
             onChangeText={field.onChange}
+            secureTextEntry={secureTextEntry}
             style={styles.input}
             //
             onFocus={onFocus.onTrue}

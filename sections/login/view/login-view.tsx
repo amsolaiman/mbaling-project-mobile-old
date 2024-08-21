@@ -17,6 +17,7 @@ import { LogoVertical } from "@/components/logo";
 //
 import LoginFootnote from "../login-footnote";
 import LoginInputField from "../login-input-field";
+import SpinnerOverlay from "@/components/spinner-overlay";
 
 // ----------------------------------------------------------------------
 
@@ -67,7 +68,11 @@ export default function LoginView() {
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <View style={styles.container}>
+      <View
+        style={styles.container}
+        loadingState={isSubmitting}
+        loadingCaption="Logging in..."
+      >
         <LogoVertical disabledLink color="dark" style={styles.logo} />
 
         <LoginInputField name="username" label="username" />

@@ -30,7 +30,10 @@ export default function LoginFootnote() {
           onDismiss={open.onFalse}
           contentContainerStyle={styles.modal}
         >
-          <Text>Example Modal. Click outside this area to dismiss.</Text>
+          <Text style={{ ...Fonts[400] }}>
+            Please proceed to the MSU Housing Management Division to sign-up for
+            an account.
+          </Text>
         </Modal>
       </Portal>
     </View>

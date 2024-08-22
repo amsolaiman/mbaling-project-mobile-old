@@ -1,4 +1,4 @@
-// components
+// sections
 import { LoginView } from "@/sections/login/view";
 
 // ----------------------------------------------------------------------

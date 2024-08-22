@@ -7,6 +7,8 @@ export const paths = {
   manage: "manage",
   post: {
     root: "post",
+    new: "post/new",
+    edit: (id: string) => `post/${id}/edit`,
     details: (id: string) => `post/${id}`,
   },
   profile: {

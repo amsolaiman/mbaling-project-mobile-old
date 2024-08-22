@@ -60,7 +60,7 @@ const LogoHorizontal: FC<LogoProps> = ({
   }
 
   return (
-    <TouchableOpacity onPress={() => router.navigate("/")}>
+    <TouchableOpacity onPress={() => router.push("/")}>
       {renderLogo}
     </TouchableOpacity>
   );

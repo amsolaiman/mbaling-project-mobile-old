@@ -1,6 +1,11 @@
 import * as Yup from "yup";
 import { useCallback, useMemo } from "react";
-import { StyleSheet, Text } from "react-native";
+import {
+  Text,
+  Keyboard,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { Button } from "react-native-paper";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -66,33 +71,35 @@ export default function LoginView() {
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <View
-        style={styles.container}
-        loadingState={isSubmitting}
-        loadingCaption="Logging in..."
-      >
-        <LogoVertical disabledLink color="dark" style={styles.logo} />
-
-        <LoginInputField name="username" label="username" />
-
-        <LoginInputField name="password" label="password" secureTextEntry />
-
-        <Button
-          onPress={handleSubmit(onSubmit)}
-          style={styles.button}
-          //
-          uppercase={false}
-          buttonColor="#fff"
-          textColor={Colors.primary}
-          labelStyle={{
-            marginVertical: 6,
-          }}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View
+          style={styles.container}
+          loadingState={isSubmitting}
+          loadingCaption="Logging in..."
         >
-          <Text style={{ ...Fonts[600] }}>log-in</Text>
-        </Button>
+          <LogoVertical disabledLink color="dark" style={styles.logo} />
 
-        <LoginFootnote />
-      </View>
+          <LoginInputField name="username" label="username" />
+
+          <LoginInputField name="password" label="password" secureTextEntry />
+
+          <Button
+            onPress={handleSubmit(onSubmit)}
+            style={styles.button}
+            //
+            uppercase={false}
+            buttonColor="#fff"
+            textColor={Colors.primary}
+            labelStyle={{
+              marginVertical: 6,
+            }}
+          >
+            <Text style={{ ...Fonts[600] }}>log-in</Text>
+          </Button>
+
+          <LoginFootnote />
+        </View>
+      </TouchableWithoutFeedback>
     </FormProvider>
   );
 }

@@ -1,18 +1,15 @@
-import { Pressable, StyleSheet } from "react-native";
-import { router } from "expo-router";
+import { StyleSheet } from "react-native";
 // components
 import { Text, View } from "@/components/custom-default";
 
 // ----------------------------------------------------------------------
 
-export default function SettingsScreen() {
+export default function PostDetailsScreen() {
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => router.push("/")}>
-        <Text font="400" style={styles.title}>
-          Settings
-        </Text>
-      </Pressable>
+      <Text font="300" style={styles.title}>
+        Post Details
+      </Text>
     </View>
   );
 }

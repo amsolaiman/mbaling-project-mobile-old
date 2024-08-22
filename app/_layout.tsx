@@ -1,11 +1,5 @@
 import { useEffect } from "react";
-import {
-  Keyboard,
-  Platform,
-  StatusBar,
-  SafeAreaView,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { Platform, SafeAreaView, StatusBar } from "react-native";
 import {
   DarkTheme,
   DefaultTheme,
@@ -19,13 +13,12 @@ import {
 // @expo
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 // hooks
 import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
 import Colors from "@/theme/Colors";
 import FontsConfig from "@/theme/FontsConfig";
-// components
-import * as SplashScreen from "expo-splash-screen";
 // styles
 import "react-native-reanimated";
 
@@ -76,14 +69,14 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme() ?? "light";
 
   const theme = {
     ...PaperTheme,
     colors: {
       ...PaperTheme.colors,
       primary: Colors.primary,
-      secondary: Colors[colorScheme === "dark" ? "dark" : "light"].text,
+      secondary: Colors[colorScheme].text,
     },
     fonts: configureFonts({ config: FontsConfig, isV3: false }),
   };
@@ -91,20 +84,27 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <PaperProvider theme={theme}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-          <SafeAreaView
-            style={{
-              flex: 1,
-              paddingTop:
-                Platform.OS === "android" ? StatusBar.currentHeight : 0,
-            }}
-          >
-            <Stack initialRouteName="index">
-              <Stack.Screen name="index" options={{ headerShown: false }} />
-              <Stack.Screen name="(main)" options={{ headerShown: false }} />
-            </Stack>
-          </SafeAreaView>
-        </TouchableWithoutFeedback>
+        <SafeAreaView
+          style={{
+            flex: 1,
+            paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+            backgroundColor: Colors[colorScheme].background,
+          }}
+        >
+          <Stack initialRouteName="index">
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="(main)" options={{ headerShown: false }} />
+            <Stack.Screen name="post/new" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="post/[id]/index"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="post/[id]/edit"
+              options={{ headerShown: false }}
+            />
+          </Stack>
+        </SafeAreaView>
       </PaperProvider>
     </ThemeProvider>
   );

@@ -1,12 +1,18 @@
-import { Image, StyleSheet, Text as DefaultText, View } from "react-native";
-import { Avatar, IconButton } from "react-native-paper";
+import { useRef } from "react";
+import { Image, StyleSheet, View, Pressable } from "react-native";
+import { Avatar } from "react-native-paper";
+import { Iconify } from "react-native-iconify";
+// @expo
+import { router } from "expo-router";
+import * as Linking from "expo-linking";
+// hooks
+import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
 import Fonts from "@/theme/Fonts";
 import Colors from "@/theme/Colors";
 // components
-import { Text } from "@/components/custom-default";
-import { Iconify } from "react-native-iconify";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { Text } from "@/components/custom-native";
+import ActionSheet, { ActionSheetRef } from "@/components/action-sheet";
 
 // ----------------------------------------------------------------------
 
@@ -14,6 +20,7 @@ type ItemProps = {
   id: string;
   title: string;
   imageUrl: string;
+  userId: string;
   name: string;
   avatarUrl: string;
 };
@@ -26,38 +33,72 @@ type Props = {
 // ----------------------------------------------------------------------
 
 export default function PostCard({ item, hideProfile = false }: Props) {
-  const { id, title, imageUrl, name, avatarUrl } = item;
+  const { id, title, imageUrl, userId, name, avatarUrl } = item;
+
+  const sheetRef = useRef<ActionSheetRef>(null);
 
   const theme = useColorScheme() ?? "light";
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.imageWrapper}>
-        <Image source={{ uri: imageUrl }} style={styles.image} />
+  const handlePressPost = () => {
+    router.push(`/post/${id}`);
+  };
 
-        <DefaultText numberOfLines={2} style={styles.title}>
-          {title}
-        </DefaultText>
+  const handlePressProfile = () => {
+    router.push(`/profile/${userId}`);
+  };
+
+  const meta = {
+    title,
+    imageUrl,
+    link: `http://localhost:8081/post/${id}`,
+  };
+
+  return (
+    <>
+      <View style={styles.container}>
+        <Pressable onPress={handlePressPost} style={styles.imageWrapper}>
+          <Image source={{ uri: imageUrl }} style={styles.image} />
+
+          <Text numberOfLines={2} style={styles.title}>
+            {title}
+          </Text>
+        </Pressable>
+
+        {!hideProfile && (
+          <View style={styles.infoWrapper}>
+            <Pressable onPress={handlePressProfile} style={styles.profile}>
+              <Avatar.Image source={{ uri: avatarUrl }} size={24} />
+
+              <Text font="600" numberOfLines={1} style={styles.profileName}>
+                {name}
+              </Text>
+            </Pressable>
+
+            <View style={styles.button}>
+              <Pressable
+                android_ripple={{
+                  color: Colors.common.black[100],
+                  borderless: false,
+                }}
+                onPress={() => sheetRef.current?.show()}
+              >
+                <Iconify
+                  icon="solar:menu-dots-bold"
+                  size={24}
+                  color={Colors[theme].text}
+                />
+              </Pressable>
+            </View>
+          </View>
+        )}
       </View>
 
-      {!hideProfile && (
-        <View style={styles.infoWrapper}>
-          <View style={styles.profile}>
-            <Avatar.Image source={{ uri: avatarUrl }} size={24} />
-
-            <Text font="600" numberOfLines={1} style={styles.profileName}>
-              {name}
-            </Text>
-          </View>
-
-          <Iconify
-            icon="solar:menu-dots-bold"
-            size={24}
-            color={Colors[theme].text}
-          />
-        </View>
-      )}
-    </View>
+      <ActionSheet
+        ref={sheetRef}
+        meta={meta}
+        onClose={() => sheetRef.current?.hide()}
+      />
+    </>
   );
 }
 
@@ -86,9 +127,9 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     fontSize: 16,
-    color: Colors.common.white,
+    color: Colors.common.white.main,
     lineHeight: 16 * 1.2,
-    backgroundColor: Colors.common.blackVariant,
+    backgroundColor: Colors.common.black[600],
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },
@@ -111,5 +152,9 @@ const styles = StyleSheet.create({
   profileName: {
     flex: 1,
     fontSize: 14,
+  },
+  button: {
+    overflow: "hidden",
+    borderRadius: 50,
   },
 });

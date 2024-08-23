@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { Modal, StyleSheet, Text, View } from "react-native";
 // theme
 import Fonts from "@/theme/Fonts";
@@ -13,7 +12,7 @@ type Props = {
   caption?: string;
 };
 
-const SpinnerOverlay: FC<Props> = ({ state, caption = "Loading..." }) => {
+const SpinnerOverlay: React.FC<Props> = ({ state, caption = "Loading..." }) => {
   return (
     <Modal
       transparent={true}
@@ -39,7 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: Colors.common.blackVariant,
+    backgroundColor: Colors.common.black[500],
   },
   container: {
     display: "flex",
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   caption: {
-    color: Colors.common.white,
+    color: Colors.common.white.main,
     textAlign: "center",
     fontSize: 14,
     ...Fonts[400],

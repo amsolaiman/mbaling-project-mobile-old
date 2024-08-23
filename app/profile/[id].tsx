@@ -1,15 +1,21 @@
 import { StyleSheet } from "react-native";
-import { router } from "expo-router";
 // components
 import { Text, View } from "@/components/custom-native";
+import { useParams } from "@/routes/hook";
+import { router } from "expo-router";
 
 // ----------------------------------------------------------------------
 
-export default function PostNewScreen() {
+export default function PostDetailsScreen() {
+  const { id } = useParams();
+
   return (
     <View style={styles.container}>
       <Text onPress={router.back} font="300" style={styles.title}>
-        Create Post
+        Profile Details
+      </Text>
+      <Text font="100" style={styles.id}>
+        {id}
       </Text>
     </View>
   );
@@ -23,5 +29,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 48,
+  },
+  id: {
+    fontSize: 12,
   },
 });

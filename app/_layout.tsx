@@ -103,6 +103,10 @@ function RootLayoutNav() {
               name="post/[id]/edit"
               options={{ headerShown: false }}
             />
+            <Stack.Screen
+              name="profile/[id]"
+              options={{ headerShown: false }}
+            />
           </Stack>
         </SafeAreaView>
       </PaperProvider>

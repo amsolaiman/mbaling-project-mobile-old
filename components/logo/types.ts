@@ -19,8 +19,8 @@ interface ModifiedViewProps extends Omit<ViewProps, "style"> {
   style?: ViewStyleProps;
 }
 
-export interface LogoProps extends ModifiedViewProps {
+export type LogoProps = ModifiedViewProps & {
   disabledLink?: boolean;
   size?: number;
   color: ColorThemeProps;
-}
+};

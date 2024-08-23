@@ -17,12 +17,16 @@ export default function HomePostButton() {
       <Pressable
         onPress={handlePress}
         android_ripple={{
-          color: "rbga(0, 0, 0, 0.25)",
+          color: Colors.common.black[200],
           borderless: false,
         }}
         style={[styles.button, styles.buttonShadow]}
       >
-        <Iconify icon="solar:pin-bold" color={Colors.common.white} size={24} />
+        <Iconify
+          icon="solar:pin-bold"
+          color={Colors.common.white.main}
+          size={24}
+        />
       </Pressable>
     </View>
   );
@@ -34,7 +38,7 @@ const styles = StyleSheet.create({
     top: 10,
     right: 10,
     overflow: "hidden",
-    borderRadius: 100,
+    borderRadius: 50,
     zIndex: 999,
   },
   button: {

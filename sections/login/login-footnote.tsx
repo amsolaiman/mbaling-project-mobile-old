@@ -22,7 +22,7 @@ export default function LoginFootnote() {
           <Iconify
             icon="solar:question-circle-linear"
             size={16}
-            color={Colors.common.white}
+            color={Colors.common.white.main}
           />
         </Pressable>
       </View>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   text: {
-    color: Colors.common.white,
+    color: Colors.common.white.main,
     fontSize: 14,
     ...Fonts[400],
   },

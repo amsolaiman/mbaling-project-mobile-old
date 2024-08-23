@@ -16,7 +16,7 @@ import Fonts from "@/theme/Fonts";
 import Colors from "@/theme/Colors";
 // components
 import { LogoVertical } from "@/components/logo";
-import { View } from "@/components/custom-default";
+import { View } from "@/components/custom-native";
 import FormProvider from "@/components/hook-form";
 //
 import LoginFootnote from "../login-footnote";
@@ -88,7 +88,7 @@ export default function LoginView() {
             style={styles.button}
             //
             uppercase={false}
-            buttonColor="#fff"
+            buttonColor="#FFF"
             textColor={Colors.primary}
             labelStyle={{
               marginVertical: 6,

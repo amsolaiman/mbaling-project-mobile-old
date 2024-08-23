@@ -4,6 +4,7 @@ import { StyleSheet } from "react-native";
 // routes
 import { paths } from "@/routes/paths";
 // hooks
+import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useClientOnlyValue } from "@/hooks/use-client-only-value";
 // theme
 import Colors from "@/theme/Colors";
@@ -19,6 +20,8 @@ import {
 // ----------------------------------------------------------------------
 
 export default function MainLayout() {
+  const theme = useColorScheme() ?? "light";
+
   const role = "student";
 
   const isStudent = role === "student";
@@ -40,7 +43,11 @@ export default function MainLayout() {
         tabBarActiveTintColor: Colors.primary,
         tabBarInactiveTintColor: Colors.primary,
         tabBarShowLabel: false,
-        tabBarStyle: [styles.tabs, styles.tabsShadow],
+        tabBarStyle: [
+          styles.tabs,
+          styles.tabsShadow,
+          { backgroundColor: Colors[theme].card },
+        ],
         tabBarItemStyle: { display: tabItemsDisplay(route.name) },
         tabBarHideOnKeyboard: true,
         // Disable the static render of the header on web
@@ -110,7 +117,7 @@ const styles = StyleSheet.create({
     left: 20,
     right: 20,
     elevation: 0,
-    borderRadius: 100,
+    borderRadius: 50,
     borderTopWidth: 0,
   },
   tabsShadow: {

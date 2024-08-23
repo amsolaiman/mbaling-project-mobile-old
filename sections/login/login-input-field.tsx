@@ -35,9 +35,9 @@ export default function LoginInputField({
             onFocus={onFocus.onTrue}
             onBlur={onFocus.onFalse}
             //
-            textColor="#fff"
-            underlineColor="#fff"
-            activeUnderlineColor="#fff"
+            textColor="#FFF"
+            underlineColor="#FFF"
+            activeUnderlineColor="#FFF"
           />
 
           {!onFocus.value && !field.value && (

@@ -1,15 +1,14 @@
-import { FC } from "react";
 import { KeyboardAvoidingView, Platform } from "react-native";
 // hooks
 import { useThemeColor } from "./use-theme-color";
 // component
 import SpinnerOverlay from "../spinner-overlay";
-// types
+//
 import { DefaultViewProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-const View: FC<DefaultViewProps> = (props) => {
+const View: React.FC<DefaultViewProps> = (props) => {
   const {
     style,
     lightColor,

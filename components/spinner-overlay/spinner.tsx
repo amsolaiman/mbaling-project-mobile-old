@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { Animated, Easing } from "react-native";
 // theme
 import Colors from "@/theme/Colors";
@@ -13,7 +12,7 @@ type Props = {
   color?: "primary" | "light" | "dark";
 };
 
-const Spinner: FC<Props> = ({ size = 48, speed, color = "primary" }) => {
+const Spinner: React.FC<Props> = ({ size = 48, speed, color = "primary" }) => {
   const spinValue = new Animated.Value(0);
 
   Animated.loop(

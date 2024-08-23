@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, Modal, Portal } from "react-native-paper";
 // hooks
@@ -6,13 +5,13 @@ import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
 import Colors from "@/theme/Colors";
 // components
-import { Text } from "@/components/custom-default";
+import { Text } from "@/components/custom-native";
 // types
 import { ConfirmDialogProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-const ConfirmDialog: FC<ConfirmDialogProps> = ({
+const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   open,
   onClose,
   message,

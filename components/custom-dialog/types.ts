@@ -1,4 +1,4 @@
-import { ButtonProps, ModalProps } from "react-native-paper";
+import { ButtonProps } from "react-native-paper";
 
 // ----------------------------------------------------------------------
 

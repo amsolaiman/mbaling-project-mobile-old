@@ -3,14 +3,8 @@ import { ViewProps } from "react-native";
 // ----------------------------------------------------------------------
 
 export type DefaultActionSheetProps = {
-  meta: ActionSheetMetaProps;
+  meta: ActionMetaProps;
   onClose: VoidFunction;
-};
-
-export type ActionSheetMetaProps = {
-  title: string;
-  imageUrl: string;
-  link: string;
 };
 
 export type ActionButtonProps = {
@@ -19,7 +13,13 @@ export type ActionButtonProps = {
   onPress: VoidFunction;
 };
 
-export type ActionButtonBasicProps = ViewProps & {
-  meta: ActionSheetMetaProps;
+export type ActionMetaProps = {
+  title: string;
+  imageUrl: string;
+  link: string;
+};
+
+export type ActionBasicProps = ViewProps & {
+  meta: ActionMetaProps;
   onClose?: VoidFunction;
 };

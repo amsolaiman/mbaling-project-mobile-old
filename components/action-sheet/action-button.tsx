@@ -3,11 +3,13 @@ import { Iconify } from "react-native-iconify";
 // @expo
 import * as Linking from "expo-linking";
 import * as Clipboard from "expo-clipboard";
+// hooks
+import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
 import Colors from "@/theme/Colors";
 //
 import { Text } from "@/components/custom-native";
-import { ActionButtonProps, ActionButtonBasicProps } from "./types";
+import { ActionButtonProps, ActionBasicProps } from "./types";
 
 // ----------------------------------------------------------------------
 
@@ -16,9 +18,20 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   icon,
   onPress,
 }) => {
+  const theme = useColorScheme() ?? "light";
+
   return (
     <View style={styles.container}>
-      <Pressable onPress={onPress} style={styles.button}>
+      <Pressable
+        onPress={onPress}
+        style={[
+          styles.button,
+          {
+            backgroundColor:
+              theme === "light" ? Colors.grey[200] : Colors.common.white[400],
+          },
+        ]}
+      >
         {icon}
       </Pressable>
 
@@ -45,7 +58,6 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.grey[200],
     borderRadius: 50,
   },
   label: {
@@ -62,7 +74,7 @@ export const iconProps = {
   color: Colors.common.black.main,
 };
 
-export const ActionButtonCopy: React.FC<ActionButtonBasicProps> = ({
+export const ActionButtonCopy: React.FC<ActionBasicProps> = ({
   meta,
   onClose = () => {},
 }) => {
@@ -85,7 +97,7 @@ export const ActionButtonCopy: React.FC<ActionButtonBasicProps> = ({
   );
 };
 
-export const ActionButtonShare: React.FC<ActionButtonBasicProps> = ({
+export const ActionButtonShare: React.FC<ActionBasicProps> = ({
   meta,
   onClose = () => {},
 }) => {
@@ -112,7 +124,7 @@ export const ActionButtonShare: React.FC<ActionButtonBasicProps> = ({
   );
 };
 
-export const ActionButtonMessage: React.FC<ActionButtonBasicProps> = ({
+export const ActionButtonMessage: React.FC<ActionBasicProps> = ({
   meta,
   onClose = () => {},
 }) => {
@@ -141,7 +153,7 @@ export const ActionButtonMessage: React.FC<ActionButtonBasicProps> = ({
   );
 };
 
-export const ActionButtonEmail: React.FC<ActionButtonBasicProps> = ({
+export const ActionButtonEmail: React.FC<ActionBasicProps> = ({
   meta,
   onClose = () => {},
 }) => {
@@ -170,7 +182,7 @@ export const ActionButtonEmail: React.FC<ActionButtonBasicProps> = ({
   );
 };
 
-export const ActionButtonReport: React.FC<ActionButtonBasicProps> = ({
+export const ActionButtonReport: React.FC<ActionBasicProps> = ({
   meta,
   onClose = () => {},
 }) => {

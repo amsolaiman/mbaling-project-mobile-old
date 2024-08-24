@@ -30,7 +30,7 @@ export default function HomeView() {
   };
 
   return (
-    <>
+    <View style={styles.cotainer}>
       <HomePostButton />
 
       <FlatList
@@ -60,11 +60,15 @@ export default function HomeView() {
         ListFooterComponent={<Spinner size={42} />}
         ListFooterComponentStyle={styles.footer}
       />
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  cotainer: {
+    flex: 1,
+    position: "relative",
+  },
   columnWrapper: {
     paddingHorizontal: 8,
     justifyContent: "space-between",

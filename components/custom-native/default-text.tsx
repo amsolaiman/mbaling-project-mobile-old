@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { Text as DefaultText } from "react-native";
 // hooks
 import { useThemeColor } from "./use-theme-color";
@@ -8,14 +9,18 @@ import { DefaultTextProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-const Text: React.FC<DefaultTextProps> = (props) => {
+const Text = forwardRef<DefaultText, DefaultTextProps>((props, ref) => {
   const { style, lightColor, darkColor, font = "400", ...otherProps } = props;
 
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
 
   return (
-    <DefaultText style={[{ color, ...Fonts[font] }, style]} {...otherProps} />
+    <DefaultText
+      ref={ref}
+      style={[{ color, ...Fonts[font] }, style]}
+      {...otherProps}
+    />
   );
-};
+});
 
 export default Text;

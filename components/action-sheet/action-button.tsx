@@ -7,8 +7,9 @@ import * as Clipboard from "expo-clipboard";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
 import Colors from "@/theme/Colors";
-//
+// components
 import { Text } from "@/components/custom-native";
+//
 import { ActionButtonProps, ActionBasicProps } from "./types";
 
 // ----------------------------------------------------------------------

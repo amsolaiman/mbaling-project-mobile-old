@@ -1,8 +1,14 @@
 // @expo
-import { Redirect } from "expo-router";
+import { Redirect, Stack } from "expo-router";
 
 // ----------------------------------------------------------------------
 
 export default function PostRedirectScreen() {
-  return <Redirect href="/" />;
+  return (
+    <>
+      <Stack.Screen options={{ title: "Oops!", headerShown: false }} />
+
+      <Redirect href="/" />
+    </>
+  );
 }

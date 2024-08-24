@@ -4,7 +4,6 @@ import { Avatar } from "react-native-paper";
 import { Iconify } from "react-native-iconify";
 // @expo
 import { router } from "expo-router";
-import * as Linking from "expo-linking";
 // hooks
 import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
@@ -67,7 +66,11 @@ export default function PostCard({ item, hideProfile = false }: Props) {
         {!hideProfile && (
           <View style={styles.infoWrapper}>
             <Pressable onPress={handlePressProfile} style={styles.profile}>
-              <Avatar.Image source={{ uri: avatarUrl }} size={24} />
+              <Avatar.Image
+                source={{ uri: avatarUrl }}
+                size={24}
+                style={styles.profileImage}
+              />
 
               <Text font="600" numberOfLines={1} style={styles.profileName}>
                 {name}
@@ -148,6 +151,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 5,
+  },
+  profileImage: {
+    backgroundColor: Colors.secondary,
   },
   profileName: {
     flex: 1,

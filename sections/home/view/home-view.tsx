@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { FlatList, RefreshControl, StyleSheet } from "react-native";
+// _mock
+import { _landlordDetails, _posts, _users } from "@/_mock";
 // hooks
 import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
@@ -29,12 +31,31 @@ export default function HomeView() {
     );
   };
 
+  const _data = _posts.map((post) => {
+    const { id, title, photos, housingId } = post;
+
+    const user = _users.find((user) => user.id === housingId);
+
+    const landlordDetail = _landlordDetails.find(
+      (detail) => detail.userId === user?.id
+    );
+
+    return {
+      id,
+      title,
+      imageUrl: photos[0],
+      userId: housingId,
+      name: landlordDetail ? landlordDetail.housingName : "",
+      avatarUrl: user ? user.avatarUrl : "",
+    };
+  });
+
   return (
     <View style={styles.cotainer}>
       <HomePostButton />
 
       <FlatList
-        data={_mock}
+        data={_data}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.card}>
@@ -88,16 +109,3 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-
-const _mock = [...Array(20)].map((_, index) => ({
-  id: `e99f09a7-dd88-49d5-b1c8-1daf80c2d7b${index + 1}`,
-  title: "Pellentesque vel mauris lacinia, aliquam nibh non",
-  imageUrl: `https://api-prod-minimal-v610.pages.dev/assets/images/cover/cover-${
-    index + 1
-  }.webp`,
-  userId: `93af56ef-54fd-22a5-b19d-ff8e2da963f${index + 1}`,
-  name: "Nam Blandit Bibendum",
-  avatarUrl: `https://api-prod-minimal-v610.pages.dev/assets/images/avatar/avatar-${
-    index + 1
-  }.webp`,
-}));

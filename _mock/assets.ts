@@ -154,7 +154,7 @@ export const _companyName = [
   "Chester Boarding House",
   "Eula's Cottages",
   "Arsenal Rentals",
-  "Howell Cottages and Bed=spacers",
+  "Howell Cottages and Bedspacers",
   "Brady and Co. Boarding House",
   "Aida's Luxury Apartments",
   "Super and Wonder Homes",

@@ -19,7 +19,7 @@ export const _users = [...Array(24)].map((_, index) => {
   const nameExtension =
     (index % 3 && "Jr.") || (index % 4 && "II") || (index % 5 && "III") || null;
 
-  const fullName = `${firstName} ${middleName.charAt(0) + "."} ${firstName}${
+  const fullName = `${firstName} ${middleName.charAt(0) + "."} ${lastName}${
     nameExtension && ", " + nameExtension
   }`;
 
@@ -36,10 +36,10 @@ export const _users = [...Array(24)].map((_, index) => {
     gender,
     email: _mock.email(index),
     phoneNumber: _mock.phoneNumber(index),
-    addressLine1: "",
-    addressLine2: "",
-    addressLine3: "",
-    addressLine4: "",
+    addressLine1: "001A Disarip Street",
+    addressLine2: "Bubonga Marawi",
+    addressLine3: "Marawi City",
+    addressLine4: "Lanao del Sur",
     //
     avatarUrl: _mock.image.avatar(index),
   };

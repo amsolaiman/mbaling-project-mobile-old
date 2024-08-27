@@ -1,5 +1,5 @@
 // sections
-import HomeView from "@/sections/home/view/home-view";
+import { HomeView } from "@/sections/home/view";
 
 // ----------------------------------------------------------------------
 

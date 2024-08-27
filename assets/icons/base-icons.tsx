@@ -61,10 +61,10 @@ const SettingsIcon = ({ isActive = false, size = 24, color }: IconProps) => {
 
 export const BaseIconHome = memo(HomeIcon);
 
+export const BaseIconUser = memo(UserIcon);
+
 export const BaseIconSearch = memo(SearchIcon);
 
 export const BaseIconManage = memo(ManageIcon);
-
-export const BaseIconUser = memo(UserIcon);
 
 export const BaseIconSettings = memo(SettingsIcon);

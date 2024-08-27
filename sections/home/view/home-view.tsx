@@ -7,8 +7,8 @@ import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
 import Colors from "@/theme/Colors";
 // components
-import { View, Text } from "@/components/custom-native";
 import { Spinner } from "@/components/spinner-overlay";
+import { View, Text } from "@/components/custom-native";
 //
 import { PostCard } from "@/sections/_common";
 import HomePostButton from "../home-post-button";

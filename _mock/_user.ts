@@ -52,9 +52,8 @@ export const _landlordDetails = [...Array(12)].map((_, index) => {
     id: _mock.id(index),
     userId: details.id,
     housingName: _mock.companyName(index),
-    mapLink: index % 3 ? `https://m.me/${lowerCase(details.firstName)}` : null,
-    chatLink:
-      index % 5 ? `https://maps.app.goo.gl/BeSE351tw35TMg${10 + index}` : null,
+    mapLink: index % 3 ? "https://m.me/ja.moiz" : null,
+    chatLink: index % 5 ? "https://maps.app.goo.gl/KiKAuja3QEP5qCTM7" : null,
   };
 });
 

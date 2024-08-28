@@ -1,5 +1,11 @@
 import { useRef } from "react";
-import { Image, StyleSheet, View, Pressable } from "react-native";
+import {
+  View,
+  Image,
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import { Avatar } from "react-native-paper";
 import { Iconify } from "react-native-iconify";
 // @expo
@@ -65,7 +71,10 @@ export default function PostCard({ item, hideProfile = false }: Props) {
 
         {!hideProfile && (
           <View style={styles.infoWrapper}>
-            <Pressable onPress={handlePressProfile} style={styles.profile}>
+            <TouchableOpacity
+              onPress={handlePressProfile}
+              style={styles.profile}
+            >
               <Avatar.Image
                 source={{ uri: avatarUrl }}
                 size={24}
@@ -75,23 +84,15 @@ export default function PostCard({ item, hideProfile = false }: Props) {
               <Text font="600" numberOfLines={1} style={styles.profileName}>
                 {name}
               </Text>
-            </Pressable>
+            </TouchableOpacity>
 
-            <View style={styles.button}>
-              <Pressable
-                android_ripple={{
-                  color: Colors.common.black[100],
-                  borderless: false,
-                }}
-                onPress={() => sheetRef.current?.show()}
-              >
-                <Iconify
-                  icon="solar:menu-dots-bold"
-                  size={24}
-                  color={Colors[theme].text}
-                />
-              </Pressable>
-            </View>
+            <TouchableOpacity onPress={() => sheetRef.current?.show()}>
+              <Iconify
+                icon="solar:menu-dots-bold"
+                size={24}
+                color={Colors[theme].text}
+              />
+            </TouchableOpacity>
           </View>
         )}
       </View>
@@ -158,9 +159,5 @@ const styles = StyleSheet.create({
   profileName: {
     flex: 1,
     fontSize: 14,
-  },
-  button: {
-    overflow: "hidden",
-    borderRadius: 50,
   },
 });

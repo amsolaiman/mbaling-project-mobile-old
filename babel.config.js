@@ -2,16 +2,7 @@ module.exports = function (api) {
   api.cache(true);
   return {
     presets: ["babel-preset-expo"],
-    plugins: [
-      [
-        "module:react-native-dotenv",
-        {
-          moduleName: "react-native-dotenv",
-          verbose: false,
-        },
-      ],
-      "react-native-iconify/plugin",
-    ],
+    plugins: [["module:react-native-dotenv"], "react-native-iconify/plugin"],
     env: {
       production: {
         plugins: ["react-native-paper/babel"],

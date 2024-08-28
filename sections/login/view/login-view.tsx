@@ -87,7 +87,6 @@ export default function LoginView() {
             onPress={handleSubmit(onSubmit)}
             style={styles.button}
             //
-            uppercase={false}
             buttonColor="#FFF"
             textColor={Colors.primary}
             labelStyle={{

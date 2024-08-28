@@ -1,4 +1,5 @@
 import { KeyboardAvoidingView, Text } from "react-native";
+import { ButtonProps } from "react-native-paper";
 
 // ----------------------------------------------------------------------
 
@@ -16,8 +17,18 @@ type SpinnerProps = {
   loadingCaption?: string;
 };
 
+type ModifiedButtonProp = Omit<
+  ButtonProps,
+  "mode" | "children" | "icon" | "loading"
+>;
+
 export type DefaultTextProps = ThemeProps & Text["props"] & FontProps;
 
 export type DefaultViewProps = ThemeProps &
   KeyboardAvoidingView["props"] &
   SpinnerProps;
+
+export type DefaultButtonProps = ModifiedButtonProp & {
+  label: string;
+  variant?: "contained" | "outlined";
+};

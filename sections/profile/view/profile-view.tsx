@@ -16,7 +16,7 @@ import SpinnerOverlay from "@/components/spinner-overlay";
 //
 import { PostCard, UserInfoSection } from "@/sections/_common";
 import { UserInfoProps } from "@/sections/_common/user-info-section";
-import { ArrowIconBold } from "@/assets/icons";
+import ProfileFooter from "../profile-footer";
 
 // ----------------------------------------------------------------------
 
@@ -122,17 +122,11 @@ export default function ProfileView() {
         ListFooterComponentStyle={styles.footer}
       />
 
-      <View style={styles.bottomAction}>
-        <View style={styles.bottomActionLeft}>
-          <ArrowIconBold color="black" size={24} />
-        </View>
-        <View style={styles.bottomActionMain}>
-          <ArrowIconBold color="black" size={24} />
-        </View>
-        <View style={styles.bottomActionRight}>
-          <ArrowIconBold color="black" size={24} />
-        </View>
-      </View>
+      <ProfileFooter
+        id={id as string}
+        mapLink={keyHousing?.mapLink}
+        chatLink={keyHousing?.chatLink}
+      />
     </View>
   );
 }
@@ -155,34 +149,5 @@ const styles = StyleSheet.create({
   },
   footer: {
     paddingBottom: 18,
-  },
-  bottomAction: {
-    paddingHorizontal: 12,
-    minHeight: 64,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    borderTopColor: Colors.grey[200],
-    borderTopWidth: 1,
-  },
-  bottomActionMain: {
-    flex: 1,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  bottomActionLeft: {
-    minWidth: "20%",
-    maxWidth: "33%",
-    display: "flex",
-    alignItems: "flex-start",
-    justifyContent: "center",
-  },
-  bottomActionRight: {
-    minWidth: "20%",
-    maxWidth: "33%",
-    display: "flex",
-    alignItems: "flex-end",
-    justifyContent: "center",
   },
 });

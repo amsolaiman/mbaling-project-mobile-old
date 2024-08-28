@@ -16,7 +16,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   onClose,
   message,
   closeButtonProps,
-  closeButtonLabel = "ok",
+  closeButtonLabel = "OK",
   action,
 }) => {
   const theme = useColorScheme() ?? "light";
@@ -40,7 +40,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
         <View style={styles.buttonContainer}>
           {action}
 
-          <Button onPress={onClose} {...closeButtonProps}>
+          <Button onPress={onClose} {...closeButtonProps} style={styles.button}>
             {closeButtonLabel}
           </Button>
         </View>
@@ -69,5 +69,8 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "flex-end",
     gap: 8,
+  },
+  button: {
+    borderRadius: 4,
   },
 });

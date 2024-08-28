@@ -6,9 +6,9 @@ import { useBoolean } from "@/hooks/use-boolean";
 
 // ----------------------------------------------------------------------
 
-interface Props extends TextInputProps {
+type Props = TextInputProps & {
   name: string;
-}
+};
 
 export default function LoginInputField({
   name,

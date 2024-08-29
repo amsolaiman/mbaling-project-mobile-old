@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
   metaContainer: {
     padding: 20,
     paddingTop: 16,
-    display: "flex",
     flexDirection: "row",
     alignItems: "flex-start",
     borderBottomWidth: 1,

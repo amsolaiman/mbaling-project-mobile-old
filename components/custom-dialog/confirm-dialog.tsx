@@ -41,7 +41,9 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
           {action}
 
           <Button onPress={onClose} {...closeButtonProps} style={styles.button}>
-            {closeButtonLabel}
+            <Text font="500" style={styles.buttonText}>
+              {closeButtonLabel}
+            </Text>
           </Button>
         </View>
       </Modal>
@@ -54,7 +56,6 @@ export default ConfirmDialog;
 const styles = StyleSheet.create({
   modal: {
     margin: 24,
-    display: "flex",
     borderRadius: 4,
   },
   text: {
@@ -64,7 +65,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     padding: 8,
-    display: "flex",
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "flex-end",
@@ -72,5 +72,8 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 4,
+  },
+  buttonText: {
+    color: Colors.primary,
   },
 });

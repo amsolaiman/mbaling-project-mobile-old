@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.common.black[500],
   },
   container: {
-    display: "flex",
     alignItems: "center",
     gap: 12,
   },

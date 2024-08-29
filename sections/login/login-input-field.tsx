@@ -52,7 +52,6 @@ export default function LoginInputField({
 const styles = StyleSheet.create({
   container: {
     position: "relative",
-    display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },

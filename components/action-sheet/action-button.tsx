@@ -48,7 +48,6 @@ export default ActionButton;
 const styles = StyleSheet.create({
   container: {
     width: 60,
-    display: "flex",
     flexDirection: "column",
     alignItems: "center",
     gap: 8,
@@ -56,7 +55,6 @@ const styles = StyleSheet.create({
   button: {
     width: 56,
     height: 56,
-    display: "flex",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 50,

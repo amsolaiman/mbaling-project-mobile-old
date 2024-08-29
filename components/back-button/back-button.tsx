@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     height: 42,
     width: 42,
-    display: "flex",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 50,

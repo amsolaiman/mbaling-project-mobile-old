@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 12,
     minHeight: 64,
-    display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     borderTopWidth: 1,
@@ -73,18 +72,15 @@ const styles = StyleSheet.create({
   },
   main: {
     flex: 1,
-    display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
   actionLeft: {
     minWidth: 24,
-    display: "flex",
     justifyContent: "center",
   },
   actionRight: {
     minWidth: 24,
-    display: "flex",
     justifyContent: "center",
   },
 });

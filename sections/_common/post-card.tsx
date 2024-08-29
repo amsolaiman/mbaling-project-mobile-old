@@ -140,7 +140,6 @@ const styles = StyleSheet.create({
   infoWrapper: {
     width: "100%",
     marginTop: 4,
-    display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -148,7 +147,6 @@ const styles = StyleSheet.create({
   },
   profile: {
     flex: 1,
-    display: "flex",
     flexDirection: "row",
     alignItems: "center",
     gap: 5,

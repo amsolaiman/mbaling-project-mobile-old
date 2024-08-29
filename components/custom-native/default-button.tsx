@@ -1,10 +1,10 @@
 import { forwardRef } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Button as DefaultButton } from "react-native-paper";
 // theme
+import Fonts from "@/theme/Fonts";
 import Colors from "@/theme/Colors";
 //
-import { Text } from "./";
 import { DefaultButtonProps } from "./types";
 
 // ----------------------------------------------------------------------
@@ -23,7 +23,6 @@ const Button = forwardRef<View, DefaultButtonProps>((props, ref) => {
         {...otherProps}
       >
         <Text
-          font="500"
           style={[
             styles.text,
             {
@@ -53,6 +52,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   text: {
+    ...Fonts[500],
     fontSize: 14,
     color: Colors.common.white.main,
   },

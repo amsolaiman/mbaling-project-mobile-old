@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet } from "react-native";
 import { View } from "@/components/custom-native";
 //
 import { UserInfoSection } from "@/sections/_common";
+import AccountStudentDisplay from "../account-student-display";
 
 // ----------------------------------------------------------------------
 
@@ -17,16 +18,18 @@ export default function AccountView() {
   };
 
   return (
-    <View style={styles.cotainer}>
+    <View style={styles.container}>
       <ScrollView>
         <UserInfoSection info={_data} />
+
+        <AccountStudentDisplay />
       </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  cotainer: {
+  container: {
     flex: 1,
   },
 });

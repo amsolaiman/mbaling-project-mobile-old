@@ -27,7 +27,7 @@ export default function AccountLandlordList({
 }: Props) {
   const theme = useColorScheme() ?? "light";
 
-  const pending = pendingList?.map((item, index) => (
+  const pending = pendingList?.map((item) => (
     <UserItemCard
       key={item.name}
       data={item}
@@ -36,7 +36,7 @@ export default function AccountLandlordList({
     />
   ));
 
-  const current = currentList?.map((item, index) => (
+  const current = currentList?.map((item) => (
     <UserItemCard
       key={item.name}
       data={item}

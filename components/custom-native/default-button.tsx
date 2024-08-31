@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
   button: {
     minWidth: 72,
     borderRadius: 50,
+    borderWidth: 1,
     borderColor: Colors.primary,
   },
   buttonLabel: {

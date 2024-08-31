@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   label: {
-    paddingBottom: 2,
     position: "absolute",
     color: Colors.common.white[800],
     fontSize: 16,

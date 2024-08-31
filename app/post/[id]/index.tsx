@@ -1,13 +1,13 @@
 import { StyleSheet } from "react-native";
+// @expo
+import { router, useLocalSearchParams } from "expo-router";
 // components
 import { Text, View } from "@/components/custom-native";
-import { useParams } from "@/routes/hook";
-import { router } from "expo-router";
 
 // ----------------------------------------------------------------------
 
 export default function PostDetailsScreen() {
-  const { id } = useParams();
+  const { id } = useLocalSearchParams();
 
   return (
     <View style={styles.container}>

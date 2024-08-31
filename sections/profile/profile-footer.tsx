@@ -1,5 +1,7 @@
 import { Alert, Linking } from "react-native";
 import { Iconify } from "react-native-iconify";
+// hooks
+import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
 import Colors from "@/theme/Colors";
 // components
@@ -15,6 +17,8 @@ type Props = {
 };
 
 export default function ProfileFooter({ id, mapLink, chatLink }: Props) {
+  const theme = useColorScheme() ?? "light";
+
   const handleViewChat = () => {
     if (chatLink) {
       Linking.openURL(chatLink);
@@ -38,7 +42,7 @@ export default function ProfileFooter({ id, mapLink, chatLink }: Props) {
         <Iconify
           icon="solar:chat-round-bold"
           size={24}
-          color={Colors.common.black.main}
+          color={Colors[theme].text}
         />
       }
       RightActionFunction={handleViewMap}
@@ -46,7 +50,7 @@ export default function ProfileFooter({ id, mapLink, chatLink }: Props) {
         <Iconify
           icon="solar:map-point-bold"
           size={24}
-          color={Colors.common.black.main}
+          color={Colors[theme].text}
         />
       }
     >

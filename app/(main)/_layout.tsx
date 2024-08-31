@@ -1,8 +1,6 @@
 import React from "react";
 import { Tabs } from "expo-router";
 import { StyleSheet } from "react-native";
-// routes
-import { paths } from "@/routes/paths";
 // hooks
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useClientOnlyValue } from "@/hooks/use-client-only-value";
@@ -27,9 +25,9 @@ export default function MainLayout() {
   const isStudent = role === "student";
 
   const tabItemsDisplay = (route: string) => {
-    if (route === paths.search && !isStudent) {
+    if (route === "search" && !isStudent) {
       return "none";
-    } else if (route === paths.manage && isStudent) {
+    } else if (route === "manage" && isStudent) {
       return "none";
     } else {
       return "flex";
@@ -38,7 +36,7 @@ export default function MainLayout() {
 
   return (
     <Tabs
-      initialRouteName={`(main)/${paths.home}`}
+      initialRouteName={"(main)/home"}
       screenOptions={({ route }) => ({
         tabBarActiveTintColor: Colors.primary,
         tabBarInactiveTintColor: Colors.primary,
@@ -56,7 +54,7 @@ export default function MainLayout() {
       })}
     >
       <Tabs.Screen
-        name={paths.home}
+        name="home"
         options={{
           title: "Home",
           headerShown: false,
@@ -65,8 +63,9 @@ export default function MainLayout() {
           ),
         }}
       />
+
       <Tabs.Screen
-        name={paths.search}
+        name="search"
         options={{
           title: "Search",
           headerShown: false,
@@ -75,8 +74,9 @@ export default function MainLayout() {
           ),
         }}
       />
+
       <Tabs.Screen
-        name={paths.manage}
+        name="manage"
         options={{
           title: "Manage",
           headerShown: false,
@@ -85,8 +85,9 @@ export default function MainLayout() {
           ),
         }}
       />
+
       <Tabs.Screen
-        name={paths.account}
+        name="account"
         options={{
           title: "Account",
           headerShown: false,
@@ -95,8 +96,9 @@ export default function MainLayout() {
           ),
         }}
       />
+
       <Tabs.Screen
-        name={paths.settings.root}
+        name="settings"
         options={{
           title: "Settings",
           headerShown: false,

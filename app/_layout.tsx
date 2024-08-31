@@ -8,7 +8,8 @@ import {
 import {
   PaperProvider,
   configureFonts,
-  MD3LightTheme as PaperTheme,
+  MD3LightTheme,
+  MD3DarkTheme,
 } from "react-native-paper";
 // @expo
 import { Stack } from "expo-router";
@@ -70,6 +71,8 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme() ?? "light";
 
+  const PaperTheme = colorScheme === "light" ? MD3LightTheme : MD3DarkTheme;
+
   const theme = {
     ...PaperTheme,
     colors: {
@@ -85,15 +88,14 @@ function RootLayoutNav() {
   };
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <PaperProvider theme={theme}>
-        <SafeAreaView
-          style={{
-            flex: 1,
-            paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-            backgroundColor: Colors[colorScheme].background,
-          }}
-        >
+    <SafeAreaView
+      style={{
+        flex: 1,
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+      }}
+    >
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        <PaperProvider theme={theme}>
           <Stack initialRouteName="index">
             <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen name="(main)" options={{ headerShown: false }} />
@@ -111,8 +113,8 @@ function RootLayoutNav() {
               options={{ headerShown: false }}
             />
           </Stack>
-        </SafeAreaView>
-      </PaperProvider>
-    </ThemeProvider>
+        </PaperProvider>
+      </ThemeProvider>
+    </SafeAreaView>
   );
 }

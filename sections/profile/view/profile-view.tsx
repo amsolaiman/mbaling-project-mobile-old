@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { FlatList, RefreshControl, StyleSheet } from "react-native";
 // @expo
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 // _mock
 import { _landlordDetails, _posts, _users } from "@/_mock";
 // hooks
-import { useParams } from "@/routes/hook";
 import { useBoolean } from "@/hooks/use-boolean";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
@@ -24,7 +23,7 @@ import ProfileFooter from "../profile-footer";
 export default function ProfileView() {
   const theme = useColorScheme() ?? "light";
 
-  const { id } = useParams();
+  const { id } = useLocalSearchParams();
 
   const keyDetails = _users.find((_) => _.id === id);
 

@@ -1,5 +1,7 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Iconify } from "react-native-iconify";
+// hooks
+import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
 import Colors from "@/theme/Colors";
 // component
@@ -36,8 +38,18 @@ export default function BaseFooterActions({
   RightActionIcon = defaultIcon,
   RightActionFunction = () => {},
 }: Props) {
+  const theme = useColorScheme() ?? "light";
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          borderTopColor:
+            theme === "light" ? Colors.grey[200] : Colors.common.white[200],
+        },
+      ]}
+    >
       <View style={styles.actionLeft}>
         <TouchableOpacity
           onPress={LeftActionFunction}
@@ -68,7 +80,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     borderTopWidth: 1,
-    borderTopColor: Colors.grey[200],
   },
   main: {
     flex: 1,

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Badge } from "react-native-paper";
 // _mock
 import { _landlordDetails, _users } from "@/_mock";
@@ -10,6 +10,7 @@ import Fonts from "@/theme/Fonts";
 import Colors from "@/theme/Colors";
 // assets
 import { ListIcon, SettingIcon } from "@/assets/icons";
+//
 import AccountLandlordList from "./account-landlord-list";
 import AccountLandlordSetup from "./account-landlord-setup";
 
@@ -26,17 +27,23 @@ const Tab: React.FC<TabProps> = ({ title, isActive, onPress, badgeCount }) => {
   const theme = useColorScheme() ?? "light";
 
   return (
-    <Pressable onPress={onPress}>
-      {title === "setup" && (
-        <SettingIcon isActive={isActive} size={30} color={Colors[theme].text} />
-      )}
+    <View>
+      <TouchableOpacity onPress={onPress}>
+        {title === "setup" && (
+          <SettingIcon
+            isActive={isActive}
+            size={30}
+            color={Colors[theme].text}
+          />
+        )}
 
-      {title === "list" && (
-        <ListIcon isActive={isActive} size={30} color={Colors[theme].text} />
-      )}
+        {title === "list" && (
+          <ListIcon isActive={isActive} size={30} color={Colors[theme].text} />
+        )}
+      </TouchableOpacity>
 
       {badgeCount ? <Badge style={styles.badge}>{badgeCount}</Badge> : null}
-    </Pressable>
+    </View>
   );
 };
 
@@ -119,6 +126,7 @@ const styles = StyleSheet.create({
     ...Fonts[500],
     position: "absolute",
     top: -5,
-    right: -10,
+    right: -7,
+    fontSize: 12,
   },
 });

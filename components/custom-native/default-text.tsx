@@ -10,7 +10,7 @@ import { DefaultTextProps } from "./types";
 // ----------------------------------------------------------------------
 
 const Text = forwardRef<DefaultText, DefaultTextProps>((props, ref) => {
-  const { style, lightColor, darkColor, font = "400", ...otherProps } = props;
+  const { style, lightColor, darkColor, font = "400", ...other } = props;
 
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
 
@@ -18,7 +18,7 @@ const Text = forwardRef<DefaultText, DefaultTextProps>((props, ref) => {
     <DefaultText
       ref={ref}
       style={[{ color, ...Fonts[font] }, style]}
-      {...otherProps}
+      {...other}
     />
   );
 });

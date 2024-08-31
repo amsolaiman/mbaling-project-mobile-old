@@ -1,8 +1,12 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Controller, useFormContext } from "react-hook-form";
 import { TextInput, TextInputProps } from "react-native-paper";
 // hooks
 import { useBoolean } from "@/hooks/use-boolean";
+// theme
+import Colors from "@/theme/Colors";
+// components
+import { Text } from "@/components/custom-native";
 
 // ----------------------------------------------------------------------
 
@@ -35,13 +39,15 @@ export default function LoginInputField({
             onFocus={onFocus.onTrue}
             onBlur={onFocus.onFalse}
             //
-            textColor="#FFF"
-            underlineColor="#FFF"
-            activeUnderlineColor="#FFF"
+            textColor={Colors.common.white.main}
+            underlineColor={Colors.common.white.main}
+            activeUnderlineColor={Colors.common.white.main}
           />
 
           {!onFocus.value && !field.value && (
-            <Text style={styles.label}>{label}</Text>
+            <Text font="400" style={styles.label}>
+              {label}
+            </Text>
           )}
         </View>
       )}
@@ -66,7 +72,7 @@ const styles = StyleSheet.create({
   label: {
     paddingBottom: 2,
     position: "absolute",
-    color: "rgba(255,255,255,0.8)",
+    color: Colors.common.white[800],
     fontSize: 16,
     pointerEvents: "none",
     zIndex: 0,

@@ -6,6 +6,7 @@ import { router } from "expo-router";
 import { _landlordDetails, _posts, _users } from "@/_mock";
 // hooks
 import { useParams } from "@/routes/hook";
+import { useBoolean } from "@/hooks/use-boolean";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
 import Colors from "@/theme/Colors";
@@ -29,25 +30,25 @@ export default function ProfileView() {
 
   const keyHousing = _landlordDetails.find((_) => _.userId === id);
 
-  const [refreshing, setRefreshing] = useState(false);
+  const refreshing = useBoolean();
 
   const [data, setData] = useState<UserInfoProps>();
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const loading = useBoolean();
 
   const onRefresh = async () => {
-    setRefreshing(true);
+    refreshing.onTrue();
 
     await new Promise(() =>
       setTimeout(() => {
-        setRefreshing(false);
+        refreshing.onFalse();
         console.log("Profile Refreshed");
       }, 1000)
     );
   };
 
   useEffect(() => {
-    setLoading(true);
+    loading.onTrue();
 
     if (keyDetails && keyHousing) {
       const data = {
@@ -60,7 +61,7 @@ export default function ProfileView() {
 
       try {
         setData(data);
-        setLoading(false);
+        loading.onFalse();
         console.info("DATA", data);
       } catch (error) {
         router.back();
@@ -91,7 +92,7 @@ export default function ProfileView() {
     });
 
   if (!data) {
-    return <SpinnerOverlay state={loading} />;
+    return <SpinnerOverlay state={loading.value} />;
   }
 
   return (
@@ -114,7 +115,7 @@ export default function ProfileView() {
         columnWrapperStyle={styles.columnWrapper}
         //
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl refreshing={refreshing.value} onRefresh={onRefresh} />
         }
         ListHeaderComponent={<UserInfoSection info={data} />}
         ListHeaderComponentStyle={styles.header}

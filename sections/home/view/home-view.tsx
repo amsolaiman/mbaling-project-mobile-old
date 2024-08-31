@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { FlatList, RefreshControl, StyleSheet } from "react-native";
 // _mock
 import { _landlordDetails, _posts, _users } from "@/_mock";
 // hooks
+import { useBoolean } from "@/hooks/use-boolean";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
 import Colors from "@/theme/Colors";
@@ -18,14 +18,14 @@ import HomePostButton from "../home-post-button";
 export default function HomeView() {
   const theme = useColorScheme() ?? "light";
 
-  const [refreshing, setRefreshing] = useState(false);
+  const refreshing = useBoolean(false);
 
   const onRefresh = async () => {
-    setRefreshing(true);
+    refreshing.onTrue();
 
     await new Promise(() =>
       setTimeout(() => {
-        setRefreshing(false);
+        refreshing.onFalse();
         console.log("Home Refreshed");
       }, 1000)
     );
@@ -70,7 +70,7 @@ export default function HomeView() {
         columnWrapperStyle={styles.columnWrapper}
         //
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl refreshing={refreshing.value} onRefresh={onRefresh} />
         }
         ListHeaderComponent={
           <Text font="700" style={{ fontSize: 20 }}>

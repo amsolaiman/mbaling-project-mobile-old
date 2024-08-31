@@ -20,7 +20,7 @@ export default function AccountView() {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView style={styles.container}>
         <UserInfoSection info={_data} />
 
         {/* <AccountStudentDisplay /> */}

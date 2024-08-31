@@ -17,7 +17,7 @@ const View = forwardRef<KeyboardAvoidingView, DefaultViewProps>(
       darkColor,
       loadingState = false,
       loadingCaption,
-      ...otherProps
+      ...other
     } = props;
 
     const backgroundColor = useThemeColor(
@@ -31,7 +31,7 @@ const View = forwardRef<KeyboardAvoidingView, DefaultViewProps>(
           ref={ref}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={[{ backgroundColor }, style]}
-          {...otherProps}
+          {...other}
         />
 
         <SpinnerOverlay state={loadingState} caption={loadingCaption} />

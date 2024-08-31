@@ -41,9 +41,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
           {action}
 
           <Button onPress={onClose} {...closeButtonProps} style={styles.button}>
-            <Text font="500" style={styles.buttonText}>
-              {closeButtonLabel}
-            </Text>
+            {closeButtonLabel}
           </Button>
         </View>
       </Modal>

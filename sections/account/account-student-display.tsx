@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 // _mock
-import { _landlordDetails, _users } from "@/_mock";
+import { _users } from "@/_mock";
 // hooks
 import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
@@ -18,7 +18,7 @@ export default function AccountStudentDisplay() {
 
   const _pending = [...Array(3)].map((item, index) => {
     const data = {
-      name: _landlordDetails[index].housingName,
+      name: _users[index].fullName,
       username: _users[index].username,
       avatarUrl: _users[index].avatarUrl,
     };

@@ -10,7 +10,7 @@ import { DefaultButtonProps } from "./types";
 // ----------------------------------------------------------------------
 
 const Button = forwardRef<View, DefaultButtonProps>((props, ref) => {
-  const { style, variant = "contained", label, ...otherProps } = props;
+  const { style, variant = "contained", label, ...other } = props;
 
   return (
     <View ref={ref}>
@@ -20,7 +20,7 @@ const Button = forwardRef<View, DefaultButtonProps>((props, ref) => {
         //
         mode={variant}
         labelStyle={styles.buttonLabel}
-        {...otherProps}
+        {...other}
       >
         <Text
           style={[

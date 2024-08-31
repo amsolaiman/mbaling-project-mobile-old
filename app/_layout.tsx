@@ -5,7 +5,11 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { PaperProvider, MD3LightTheme as PaperTheme } from "react-native-paper";
+import {
+  PaperProvider,
+  configureFonts,
+  MD3LightTheme as PaperTheme,
+} from "react-native-paper";
 // @expo
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
@@ -73,6 +77,11 @@ function RootLayoutNav() {
       primary: Colors.primary,
       secondary: Colors.secondary,
     },
+    fonts: configureFonts({
+      config: {
+        fontFamily: "Metropolis400",
+      },
+    }),
   };
 
   return (

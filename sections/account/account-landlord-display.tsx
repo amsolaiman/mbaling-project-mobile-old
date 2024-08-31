@@ -1,70 +1,99 @@
 import { useState } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import PagerView from "react-native-pager-view";
+import { Pressable, StyleSheet, View } from "react-native";
+import { Badge } from "react-native-paper";
 // _mock
 import { _landlordDetails, _users } from "@/_mock";
 // hooks
 import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
+import Fonts from "@/theme/Fonts";
 import Colors from "@/theme/Colors";
-// components
-import InfoHelper from "@/components/info-helper";
-import { Text } from "@/components/custom-native";
-//
-import UserItemCard from "../_common/user-item-card";
+// assets
+import { ListIcon, SettingIcon } from "@/assets/icons";
+import AccountLandlordList from "./account-landlord-list";
+import AccountLandlordSetup from "./account-landlord-setup";
 
 // ----------------------------------------------------------------------
+
 type TabProps = {
   title: string;
-  index: number;
-  setIndex: (index: number) => void;
   isActive: boolean;
+  onPress: VoidFunction;
+  badgeCount: number | null;
 };
 
-const Tab: React.FC<TabProps> = ({ title, index, setIndex, isActive }) => (
-  <TouchableOpacity
-    style={[styles.tabButton, isActive && styles.activeTab]}
-    onPress={() => setIndex(index)}
-  >
-    <Text style={[styles.tabText, isActive && styles.activeTabText]}>
-      {title}
-    </Text>
-  </TouchableOpacity>
-);
-
-export default function AccountLandlordDisplay() {
+const Tab: React.FC<TabProps> = ({ title, isActive, onPress, badgeCount }) => {
   const theme = useColorScheme() ?? "light";
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  return (
+    <Pressable onPress={onPress}>
+      {title === "setup" && (
+        <SettingIcon isActive={isActive} size={30} color={Colors[theme].text} />
+      )}
 
-  console.log(selectedIndex)
+      {title === "list" && (
+        <ListIcon isActive={isActive} size={30} color={Colors[theme].text} />
+      )}
+
+      {badgeCount ? <Badge style={styles.badge}>{badgeCount}</Badge> : null}
+    </Pressable>
+  );
+};
+
+// ----------------------------------------------------------------------
+
+export default function AccountLandlordDisplay() {
+  const [currentTab, setCurrentTab] = useState<string>("setup");
+
+  const _pending = [...Array(3)].map((item, index) => ({
+    name: _landlordDetails[index].housingName,
+    username: _users[index].username,
+    avatarUrl: _users[index].avatarUrl,
+  }));
+
+  const _current = [...Array(5)].map((item, index) => ({
+    name: _landlordDetails[index + 3].housingName,
+    username: _users[index + 3].username,
+    avatarUrl: _users[index + 3].avatarUrl,
+  }));
+
+  const TABS = [
+    {
+      name: "setup",
+      badgeCount: null,
+    },
+    {
+      name: "list",
+      badgeCount: _pending.length,
+    },
+  ];
 
   return (
     <View style={styles.container}>
       <View style={styles.tabContainer}>
-        {["Setup", "List"].map((title, index) => (
+        {TABS.map((tab) => (
           <Tab
-            key={title}
-            title={title}
-            index={index}
-            setIndex={setSelectedIndex}
-            isActive={selectedIndex === index}
+            key={tab.name}
+            title={tab.name}
+            isActive={currentTab === tab.name}
+            onPress={() => setCurrentTab(tab.name)}
+            badgeCount={tab.badgeCount}
           />
         ))}
       </View>
 
-      <PagerView
-        style={styles.pagerView}
-        initialPage={0}
-        // onPageSelected={(e) => setSelectedIndex(e.nativeEvent.position)}
-      >
-        <View key="1" style={[styles.page, { backgroundColor: "red" }]}>
-          <Text>Content for Tab 1</Text>
-        </View>
-        <View key="2" style={[styles.page, { backgroundColor: "blue" }]}>
-          <Text>Content for Tab 2</Text>
-        </View>
-      </PagerView>
+      <View style={styles.tabPage}>
+        {currentTab === "setup" && (
+          <AccountLandlordSetup
+            chatLink={_landlordDetails[1].chatLink}
+            mapLink={_landlordDetails[1].mapLink}
+          />
+        )}
+
+        {currentTab === "list" && (
+          <AccountLandlordList pendingList={_pending} currentList={_current} />
+        )}
+      </View>
     </View>
   );
 }
@@ -74,31 +103,22 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   tabContainer: {
+    paddingTop: 12,
+    paddingHorizontal: 22,
     flexDirection: "row",
-    justifyContent: "space-around",
-    paddingVertical: 10,
-    backgroundColor: "#f8f8f8",
+    justifyContent: "flex-start",
+    gap: 12,
   },
-  tabButton: {
-    padding: 10,
-  },
-  tabText: {
-    fontSize: 16,
-    color: "#666",
-  },
-  activeTab: {
-    borderBottomWidth: 2,
-    borderBottomColor: "#007aff",
-  },
-  activeTabText: {
-    color: "#007aff",
-  },
-  pagerView: {
+  tabPage: {
     flex: 1,
+    paddingTop: 24,
+    paddingBottom: 102,
+    paddingHorizontal: 16,
   },
-  page: {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
+  badge: {
+    ...Fonts[500],
+    position: "absolute",
+    top: -5,
+    right: -10,
   },
 });

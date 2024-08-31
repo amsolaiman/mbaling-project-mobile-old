@@ -9,7 +9,7 @@ import Colors from "@/theme/Colors";
 import InfoHelper from "@/components/info-helper";
 import { Text, View } from "@/components/custom-native";
 //
-import AccountListItem from "../_common/account-list-item";
+import UserItemCard from "../_common/user-item-card";
 
 // ----------------------------------------------------------------------
 
@@ -24,8 +24,8 @@ export default function AccountStudentDisplay() {
     };
 
     return (
-      <AccountListItem
-        key={item}
+      <UserItemCard
+        key={data.name}
         data={data}
         onReject={() => console.log(data.name)}
       />

@@ -4,6 +4,7 @@ import { View } from "@/components/custom-native";
 //
 import { UserInfoSection } from "@/sections/_common";
 import AccountStudentDisplay from "../account-student-display";
+import AccountLandlordDisplay from "../account-landlord-display";
 
 // ----------------------------------------------------------------------
 
@@ -22,7 +23,9 @@ export default function AccountView() {
       <ScrollView>
         <UserInfoSection info={_data} />
 
-        <AccountStudentDisplay />
+        {/* <AccountStudentDisplay /> */}
+
+        <AccountLandlordDisplay />
       </ScrollView>
     </View>
   );

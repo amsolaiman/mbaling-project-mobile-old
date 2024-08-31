@@ -24,7 +24,7 @@ type Props = {
 
 // ----------------------------------------------------------------------
 
-export default function AccountListItem({ data, onApprove, onReject }: Props) {
+export default function UserItemCard({ data, onApprove, onReject }: Props) {
   const { name, username, avatarUrl } = data;
 
   const theme = useColorScheme() ?? "light";

@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import { StyleSheet } from "react-native";
 import { useForm } from "react-hook-form";
 // @expo
-import { useFocusEffect, usePathname } from "expo-router";
+import { useFocusEffect } from "expo-router";
 // hooks
 import { useBoolean } from "@/hooks/use-boolean";
 // components
@@ -46,8 +46,6 @@ type LinkFormProps = {
 };
 
 function LinkForm({ link = null, type }: LinkFormProps) {
-  const pathname = usePathname();
-
   const isChatType = type === "chat";
 
   const enable = useBoolean();

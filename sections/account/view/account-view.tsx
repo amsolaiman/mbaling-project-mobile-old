@@ -9,6 +9,8 @@ import AccountLandlordDisplay from "../account-landlord-display";
 // ----------------------------------------------------------------------
 
 export default function AccountView() {
+  const role = "landlord";
+
   const _data = {
     username: "alex_sander",
     fullName: "Alex C. Sander",
@@ -23,9 +25,9 @@ export default function AccountView() {
       <ScrollView style={styles.container}>
         <UserInfoSection info={_data} />
 
-        {/* <AccountStudentDisplay /> */}
+        {role === "student" && <AccountStudentDisplay />}
 
-        <AccountLandlordDisplay />
+        {role === "landlord" && <AccountLandlordDisplay />}
       </ScrollView>
     </View>
   );

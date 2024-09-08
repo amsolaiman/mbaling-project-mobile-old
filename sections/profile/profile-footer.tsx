@@ -1,4 +1,4 @@
-import { Alert, Linking } from "react-native";
+import { Alert, Linking, StyleSheet, View } from "react-native";
 import { Iconify } from "react-native-iconify";
 // hooks
 import { useColorScheme } from "@/hooks/use-color-scheme";
@@ -36,25 +36,35 @@ export default function ProfileFooter({ id, mapLink, chatLink }: Props) {
   };
 
   return (
-    <BaseFooterActions
-      LeftActionFunction={handleViewChat}
-      LeftActionIcon={
-        <Iconify
-          icon="solar:chat-round-bold"
-          size={24}
-          color={Colors[theme].text}
-        />
-      }
-      RightActionFunction={handleViewMap}
-      RightActionIcon={
-        <Iconify
-          icon="solar:map-point-bold"
-          size={24}
-          color={Colors[theme].text}
-        />
-      }
-    >
-      <Button label="Apply" onPress={() => console.log(id)} />
-    </BaseFooterActions>
+    <View style={styles.container}>
+      <BaseFooterActions
+        LeftActionFunction={handleViewChat}
+        LeftActionIcon={
+          <Iconify
+            icon="solar:chat-round-bold"
+            size={24}
+            color={Colors[theme].text}
+          />
+        }
+        RightActionFunction={handleViewMap}
+        RightActionIcon={
+          <Iconify
+            icon="solar:map-point-bold"
+            size={24}
+            color={Colors[theme].text}
+          />
+        }
+      >
+        <Button label="Apply" onPress={() => console.log(id)} />
+      </BaseFooterActions>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+});

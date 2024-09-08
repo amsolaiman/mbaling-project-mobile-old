@@ -21,7 +21,7 @@ import ActionSheet, { ActionSheetRef } from "@/components/action-sheet";
 
 // ----------------------------------------------------------------------
 
-type ItemProps = {
+export type PostCardProps = {
   id: string;
   title: string;
   imageUrl: string;
@@ -31,7 +31,7 @@ type ItemProps = {
 };
 
 type Props = {
-  item: ItemProps;
+  item: PostCardProps;
   hideProfile?: boolean;
 };
 

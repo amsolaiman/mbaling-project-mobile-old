@@ -22,12 +22,12 @@ export default function MainLayout() {
 
   const role = "student";
 
-  const isStudent = role === "student";
+  const isLandlord = role === "student";
 
   const tabItemsDisplay = (route: string) => {
-    if (route === "search" && !isStudent) {
+    if (route === "search" && isLandlord) {
       return "none";
-    } else if (route === "manage" && isStudent) {
+    } else if (route === "manage" && !isLandlord) {
       return "none";
     } else {
       return "flex";

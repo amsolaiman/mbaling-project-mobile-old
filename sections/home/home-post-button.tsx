@@ -13,14 +13,14 @@ export default function HomePostButton() {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, styles.shadow]}>
       <Pressable
         onPress={handlePress}
         android_ripple={{
           color: Colors.common.black[200],
           borderless: false,
         }}
-        style={[styles.button, styles.buttonShadow]}
+        style={styles.button}
       >
         <Iconify
           icon="solar:pin-bold"
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: Colors.primary,
   },
-  buttonShadow: {
+  shadow: {
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

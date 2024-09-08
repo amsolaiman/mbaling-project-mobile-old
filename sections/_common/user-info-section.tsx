@@ -7,7 +7,7 @@ import { Text } from "@/components/custom-native";
 
 // ----------------------------------------------------------------------
 
-export type UserInfoProps = {
+export type UserInfoSectionProps = {
   username: string;
   fullName: string;
   detailLine1: string;
@@ -16,7 +16,7 @@ export type UserInfoProps = {
 };
 
 type Props = {
-  info: UserInfoProps;
+  info: UserInfoSectionProps;
   hideUsername?: boolean;
 };
 

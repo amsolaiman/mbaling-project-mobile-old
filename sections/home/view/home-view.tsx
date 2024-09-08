@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react";
+import { shuffle } from "lodash";
 import { FlatList, RefreshControl, StyleSheet } from "react-native";
-// _mock
-import { _landlordDetails, _posts, _users } from "@/_mock";
 // hooks
 import { useBoolean } from "@/hooks/use-boolean";
 import { useColorScheme } from "@/hooks/use-color-scheme";
@@ -9,8 +9,11 @@ import Colors from "@/theme/Colors";
 // components
 import { Spinner } from "@/components/spinner-overlay";
 import { View, Text } from "@/components/custom-native";
+// types
+import { PostResponse } from "@/types/posts";
 //
 import { PostCard } from "@/sections/_common";
+import { PostCardProps } from "@/sections/_common/post-card";
 import HomePostButton from "../home-post-button";
 
 // ----------------------------------------------------------------------
@@ -18,44 +21,56 @@ import HomePostButton from "../home-post-button";
 export default function HomeView() {
   const theme = useColorScheme() ?? "light";
 
-  const refreshing = useBoolean(false);
+  const refreshing = useBoolean();
+
+  const [data, setData] = useState<PostCardProps[]>();
+
+  const getData = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.EXPO_PUBLIC_HOST_API}/api/post/list`
+      );
+
+      const posts: PostResponse[] = await response.json();
+
+      const _data = posts.map((post) => {
+        const { id, title, uploads, user_id, housing_name, avatar_url } = post;
+
+        return {
+          id,
+          title,
+          imageUrl: uploads[0].img_url,
+          userId: user_id,
+          name: housing_name,
+          avatarUrl: avatar_url,
+        };
+      });
+
+      setData(shuffle(_data));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const onRefresh = async () => {
     refreshing.onTrue();
 
-    await new Promise(() =>
-      setTimeout(() => {
-        refreshing.onFalse();
-        console.log("Home Refreshed");
-      }, 1000)
-    );
+    await new Promise(async () => {
+      await getData();
+      refreshing.onFalse();
+    });
   };
 
-  const _data = _posts.map((post) => {
-    const { id, title, photos, housingId } = post;
-
-    const user = _users.find((user) => user.id === housingId);
-
-    const landlordDetail = _landlordDetails.find(
-      (detail) => detail.userId === user?.id
-    );
-
-    return {
-      id,
-      title,
-      imageUrl: photos[0],
-      userId: housingId,
-      name: landlordDetail ? landlordDetail.housingName : "",
-      avatarUrl: user ? user.avatarUrl : "",
-    };
-  });
-
   return (
-    <View style={styles.cotainer}>
+    <View style={styles.container}>
       <HomePostButton />
 
       <FlatList
-        data={_data}
+        data={data}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.card}>
@@ -86,7 +101,7 @@ export default function HomeView() {
 }
 
 const styles = StyleSheet.create({
-  cotainer: {
+  container: {
     flex: 1,
     position: "relative",
   },

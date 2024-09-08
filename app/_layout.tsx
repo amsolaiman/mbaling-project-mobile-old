@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { Platform, SafeAreaView, StatusBar } from "react-native";
 import {
-  DarkTheme,
-  DefaultTheme,
   ThemeProvider,
+  DarkTheme as NativeDarkTheme,
+  DefaultTheme as NativeDefaultTheme,
 } from "@react-navigation/native";
 import {
+  MD3DarkTheme,
+  MD3LightTheme,
   PaperProvider,
   configureFonts,
-  MD3LightTheme,
-  MD3DarkTheme,
 } from "react-native-paper";
 // @expo
 import { Stack } from "expo-router";
@@ -71,12 +71,13 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme() ?? "light";
 
-  const PaperTheme = colorScheme === "light" ? MD3LightTheme : MD3DarkTheme;
+  const NativePaperTheme =
+    colorScheme === "light" ? MD3LightTheme : MD3DarkTheme;
 
-  const theme = {
-    ...PaperTheme,
+  const paperTheme = {
+    ...NativePaperTheme,
     colors: {
-      ...PaperTheme.colors,
+      ...NativePaperTheme.colors,
       primary: Colors.primary,
       secondary: Colors.secondary,
     },
@@ -87,6 +88,14 @@ function RootLayoutNav() {
     }),
   };
 
+  const DefaultTheme = {
+    ...NativeDefaultTheme,
+    colors: {
+      ...NativeDefaultTheme.colors,
+      background: "rgb(255, 255, 255)",
+    },
+  };
+
   return (
     <SafeAreaView
       style={{
@@ -94,20 +103,27 @@ function RootLayoutNav() {
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
       }}
     >
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <PaperProvider theme={theme}>
+      <ThemeProvider
+        value={colorScheme === "dark" ? NativeDarkTheme : DefaultTheme}
+      >
+        <PaperProvider theme={paperTheme}>
           <Stack initialRouteName="index">
             <Stack.Screen name="index" options={{ headerShown: false }} />
+
             <Stack.Screen name="(main)" options={{ headerShown: false }} />
+
             <Stack.Screen name="post/new" options={{ headerShown: false }} />
+
             <Stack.Screen
               name="post/[id]/index"
               options={{ headerShown: false }}
             />
+
             <Stack.Screen
               name="post/[id]/edit"
               options={{ headerShown: false }}
             />
+
             <Stack.Screen
               name="profile/[id]"
               options={{ headerShown: false }}

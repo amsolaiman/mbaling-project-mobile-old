@@ -5,12 +5,15 @@ import {
   Keyboard,
   StyleSheet,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 import { Button } from "react-native-paper";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 // @expo
 import { router } from "expo-router";
+// auth
+import { useAuthContext } from "@/auth/hooks";
 // theme
 import Fonts from "@/theme/Fonts";
 import Colors from "@/theme/Colors";
@@ -30,6 +33,8 @@ type FormValuesProps = {
 };
 
 export default function LoginView() {
+  const { login } = useAuthContext();
+
   const LoginSchema = Yup.object().shape({
     username: Yup.string().required(),
     password: Yup.string().required(),
@@ -58,12 +63,12 @@ export default function LoginView() {
   const onSubmit = useCallback(
     async (data: FormValuesProps) => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        await login?.(data.username, data.password);
         reset();
-        router.push("/(main)/home");
+        router.replace("/(main)/home");
         console.info("DATA", data);
-      } catch (error) {
-        console.error(error);
+      } catch (error: any) {
+        Alert.alert(error.message);
       }
     },
     [reset, router]

@@ -5,6 +5,8 @@ import { router, useLocalSearchParams } from "expo-router";
 // hooks
 import { useBoolean } from "@/hooks/use-boolean";
 import { useColorScheme } from "@/hooks/use-color-scheme";
+// utils
+import axios, { API_ENDPOINTS } from "@/utils/axios";
 // theme
 import Colors from "@/theme/Colors";
 // components
@@ -43,19 +45,19 @@ export default function ProfileView() {
 
   const getData = async () => {
     try {
-      const userResponse = await fetch(
-        `${process.env.EXPO_PUBLIC_HOST_API}/api/landlord/list/${id as string}`
+      const userResponse = await axios.get(
+        API_ENDPOINTS.landlord.get(id as string)
       );
 
-      const postsResponse = await fetch(
-        `${process.env.EXPO_PUBLIC_HOST_API}/api/post/search?userId=${
-          id as string
-        }`
-      );
+      const postsResponse = await axios.get(API_ENDPOINTS.post.search, {
+        params: {
+          userId: id,
+        },
+      });
 
-      const user: UserLandlordResponse = await userResponse.json();
+      const user: UserLandlordResponse = userResponse.data;
 
-      const posts: PostResponse[] = await postsResponse.json();
+      const posts: PostResponse[] = postsResponse.data;
 
       const _userData = {
         username: user.username,

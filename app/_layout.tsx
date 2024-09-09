@@ -15,6 +15,9 @@ import {
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+// auth
+import { GuestGuard } from "@/auth/guard";
+import { AuthProvider, AuthConsumer } from "@/auth/context";
 // hooks
 import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
@@ -103,34 +106,35 @@ function RootLayoutNav() {
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
       }}
     >
-      <ThemeProvider
-        value={colorScheme === "dark" ? NativeDarkTheme : DefaultTheme}
-      >
-        <PaperProvider theme={paperTheme}>
-          <Stack initialRouteName="index">
-            <Stack.Screen name="index" options={{ headerShown: false }} />
-
-            <Stack.Screen name="(main)" options={{ headerShown: false }} />
-
-            <Stack.Screen name="post/new" options={{ headerShown: false }} />
-
-            <Stack.Screen
-              name="post/[id]/index"
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="post/[id]/edit"
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="profile/[id]"
-              options={{ headerShown: false }}
-            />
-          </Stack>
-        </PaperProvider>
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider
+          value={colorScheme === "dark" ? NativeDarkTheme : DefaultTheme}
+        >
+          <PaperProvider theme={paperTheme}>
+            <AuthConsumer>
+              <Routes />
+            </AuthConsumer>
+          </PaperProvider>
+        </ThemeProvider>
+      </AuthProvider>
     </SafeAreaView>
+  );
+}
+
+function Routes() {
+  return (
+    <Stack initialRouteName="index">
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+
+      <Stack.Screen name="(main)" options={{ headerShown: false }} />
+
+      <Stack.Screen name="post/new" options={{ headerShown: false }} />
+
+      <Stack.Screen name="post/[id]/index" options={{ headerShown: false }} />
+
+      <Stack.Screen name="post/[id]/edit" options={{ headerShown: false }} />
+
+      <Stack.Screen name="profile/[id]" options={{ headerShown: false }} />
+    </Stack>
   );
 }

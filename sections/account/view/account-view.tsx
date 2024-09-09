@@ -1,4 +1,6 @@
 import { ScrollView, StyleSheet } from "react-native";
+// auth
+import { useAuthContext } from "@/auth/hooks";
 // components
 import { View } from "@/components/custom-native";
 //
@@ -9,27 +11,30 @@ import AccountLandlordDisplay from "../account-landlord-display";
 // ----------------------------------------------------------------------
 
 export default function AccountView() {
-  const role = "landlord";
+  const { user } = useAuthContext();
+
+  const isLandlord = user?.role === "landlord";
 
   const _data = {
-    username: "alex_sander",
-    fullName: "Alex C. Sander",
-    detailLine1: "BS Information Technology (Database Systems)",
-    detailLine2: "College of Information and Computing Sciences",
-    avatarUrl:
-      "https://api-prod-minimal-v610.pages.dev/assets/images/avatar/avatar-1.webp",
+    username: user?.username,
+    fullName: isLandlord ? user?.housing_name : user?.full_name,
+    detailLine1: isLandlord
+      ? `${user?.address_line_1}, ${user?.address_line_2}`
+      : user?.degree,
+    detailLine2: isLandlord
+      ? `${user?.address_line_2}, ${user?.address_line_3}`
+      : user?.college,
+    avatarUrl: user?.avatar_url,
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.container}>
-        <UserInfoSection info={_data} />
+    <ScrollView style={styles.container}>
+      <UserInfoSection info={_data} />
 
-        {role === "student" && <AccountStudentDisplay />}
+      {user?.role === "student" && <AccountStudentDisplay />}
 
-        {role === "landlord" && <AccountLandlordDisplay />}
-      </ScrollView>
-    </View>
+      {user?.role === "landlord" && <AccountLandlordDisplay />}
+    </ScrollView>
   );
 }
 

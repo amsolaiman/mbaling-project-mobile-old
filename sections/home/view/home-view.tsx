@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { shuffle } from "lodash";
 import { FlatList, RefreshControl, StyleSheet } from "react-native";
+// auth
+import { useAuthContext } from "@/auth/hooks";
 // hooks
 import { useBoolean } from "@/hooks/use-boolean";
 import { useColorScheme } from "@/hooks/use-color-scheme";
+// utils
+import axios, { API_ENDPOINTS } from "@/utils/axios";
 // theme
 import Colors from "@/theme/Colors";
 // components
@@ -19,6 +23,8 @@ import HomePostButton from "../home-post-button";
 // ----------------------------------------------------------------------
 
 export default function HomeView() {
+  const { user } = useAuthContext();
+
   const theme = useColorScheme() ?? "light";
 
   const refreshing = useBoolean();
@@ -27,11 +33,9 @@ export default function HomeView() {
 
   const getData = async () => {
     try {
-      const response = await fetch(
-        `${process.env.EXPO_PUBLIC_HOST_API}/api/post/list`
-      );
+      const response = await axios.get(API_ENDPOINTS.post.list);
 
-      const posts: PostResponse[] = await response.json();
+      const posts: PostResponse[] = response.data;
 
       const _data = posts.map((post) => {
         const { id, title, uploads, user_id, housing_name, avatar_url } = post;
@@ -67,7 +71,7 @@ export default function HomeView() {
 
   return (
     <View style={styles.container}>
-      <HomePostButton />
+      {user?.role === "landlord" && <HomePostButton />}
 
       <FlatList
         data={data}

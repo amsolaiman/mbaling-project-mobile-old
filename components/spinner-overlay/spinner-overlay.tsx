@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Modal, StyleSheet, Text, View } from "react-native";
 // theme
 import Fonts from "@/theme/Fonts";
@@ -12,7 +13,7 @@ type Props = {
   caption?: string;
 };
 
-const SpinnerOverlay: React.FC<Props> = ({ state, caption = "Loading..." }) => {
+const SpinnerOverlay: FC<Props> = ({ state, caption = "Loading..." }) => {
   return (
     <Modal
       transparent={true}

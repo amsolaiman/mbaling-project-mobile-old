@@ -1,4 +1,3 @@
-import React from "react";
 import { StyleSheet } from "react-native";
 // @expo
 import { Tabs } from "expo-router";
@@ -55,6 +54,7 @@ export default function MainLayout() {
           tabBarHideOnKeyboard: true,
           // Disable the static render of the header on web
           // to prevent a hydration error in React Navigation v6.
+          // eslint-disable-next-line react-hooks/rules-of-hooks
           headerShown: useClientOnlyValue(false, true),
         })}
       >

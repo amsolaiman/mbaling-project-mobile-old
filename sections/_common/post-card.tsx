@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useCallback, useRef } from "react";
 import {
   View,
   Image,
@@ -11,6 +11,7 @@ import { Iconify } from "react-native-iconify";
 // @expo
 import { router } from "expo-router";
 // hooks
+import { useAuthContext } from "@/auth/hooks";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 // theme
 import Fonts from "@/theme/Fonts";
@@ -38,19 +39,25 @@ type Props = {
 // ----------------------------------------------------------------------
 
 export default function PostCard({ item, hideProfile = false }: Props) {
+  const { user } = useAuthContext();
+
   const { id, title, imageUrl, userId, name, avatarUrl } = item;
 
   const sheetRef = useRef<ActionSheetRef>(null);
 
   const theme = useColorScheme() ?? "light";
 
-  const handlePressPost = () => {
+  const handlePressPost = useCallback(() => {
     router.push(`/post/${id}`);
-  };
+  }, [id]);
 
-  const handlePressProfile = () => {
-    router.push(`/profile/${userId}`);
-  };
+  const handlePressProfile = useCallback(() => {
+    if (user?.id === userId) {
+      router.push(`/(main)/account`);
+    } else {
+      router.push(`/profile/${userId}`);
+    }
+  }, [user?.id, userId]);
 
   const meta = {
     title,

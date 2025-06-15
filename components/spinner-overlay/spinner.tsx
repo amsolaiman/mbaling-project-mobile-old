@@ -1,8 +1,8 @@
+import { FC } from "react";
 import { Animated, Easing } from "react-native";
+import { Iconify } from "react-native-iconify";
 // theme
 import Colors from "@/theme/Colors";
-// component
-import { Iconify } from "react-native-iconify";
 
 // ----------------------------------------------------------------------
 
@@ -12,7 +12,7 @@ type Props = {
   color?: "primary" | "light" | "dark";
 };
 
-const Spinner: React.FC<Props> = ({ size = 48, speed, color = "primary" }) => {
+const Spinner: FC<Props> = ({ size = 48, speed, color = "primary" }) => {
   const spinValue = new Animated.Value(0);
 
   Animated.loop(

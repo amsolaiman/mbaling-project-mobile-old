@@ -71,7 +71,7 @@ export default function LoginView() {
         Alert.alert(error.message);
       }
     },
-    [reset, router]
+    [login, reset]
   );
 
   return (

@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Pressable, StyleSheet } from "react-native";
 // @expo
 import { router } from "expo-router";
@@ -14,7 +15,7 @@ type Props = {
   position?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
 };
 
-const BackButton: React.FC<Props> = ({ position = "top-left" }) => {
+const BackButton: FC<Props> = ({ position = "top-left" }) => {
   const theme = useColorScheme() ?? "light";
 
   return (

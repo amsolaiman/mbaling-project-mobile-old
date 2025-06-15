@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, Modal, Portal } from "react-native-paper";
 // hooks
@@ -11,7 +12,7 @@ import { ConfirmDialogProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
+const ConfirmDialog: FC<ConfirmDialogProps> = ({
   open,
   onClose,
   message,

@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 // @expo
 import { router } from "expo-router";
 //
@@ -21,10 +21,11 @@ export default function AuthGuard({ children }: AuthGuardProps) {
     } else {
       setChecked(true);
     }
-  }, [authenticated, router]);
+  }, [authenticated]);
 
   useEffect(() => {
     check();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!checked) {

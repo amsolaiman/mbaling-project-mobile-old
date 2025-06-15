@@ -70,29 +70,28 @@ function LinkForm({ link = null, type }: LinkFormProps) {
 
   const onSubmit = useCallback(
     async (data: FormValuesProps) => {
-      if (enable.value) {
-        try {
-          await new Promise((resolve) => setTimeout(resolve, 500));
-          enable.onFalse();
-          console.info("DATA", data);
-        } catch (error) {
-          console.error(error);
-        }
-      } else {
-        enable.onTrue();
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        enable.onFalse();
+        console.info("DATA", data);
+      } catch (error) {
+        console.error(error);
       }
     },
     [enable]
   );
 
-  useFocusEffect(
-    useCallback(() => {
-      return () => {
-        reset();
-        enable.onFalse();
-      };
-    }, [])
-  );
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     reset(defaultValues);
+  //     enable.onFalse();
+
+  //     return () => {
+  //       reset(defaultValues);
+  //       enable.onFalse();
+  //     };
+  //   }, [defaultValues, reset, enable])
+  // );
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
@@ -116,14 +115,25 @@ function LinkForm({ link = null, type }: LinkFormProps) {
           style={{ height: 48 }}
         />
 
-        <Button
-          onPress={handleSubmit(onSubmit)}
-          variant={enable.value ? "contained" : "outlined"}
-          label={enable.value ? "Save" : "Edit"}
-          style={formStyles.button}
-          //
-          labelStyle={formStyles.buttonLabel}
-        />
+        {enable.value ? (
+          <Button
+            onPress={handleSubmit(onSubmit)}
+            variant="contained"
+            label="Save"
+            style={formStyles.button}
+            //
+            labelStyle={formStyles.buttonLabel}
+          />
+        ) : (
+          <Button
+            onPress={enable.onTrue}
+            variant="outlined"
+            label="Edit"
+            style={formStyles.button}
+            //
+            labelStyle={formStyles.buttonLabel}
+          />
+        )}
       </View>
     </FormProvider>
   );

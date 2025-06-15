@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 // @expo
 import { router } from "expo-router";
 //
@@ -17,7 +17,7 @@ export default function GuestGuard({ children }: GuestGuardProps) {
     if (authenticated) {
       router.replace("/(main)/home");
     }
-  }, [authenticated, router]);
+  }, [authenticated]);
 
   useEffect(() => {
     check();

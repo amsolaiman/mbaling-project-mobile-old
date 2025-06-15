@@ -22,7 +22,7 @@ export default function ActionSheetController(
   meta: ActionMetaProps,
   onClose: VoidFunction
 ) {
-  const socials = addAvailableSocial(meta, onClose) ?? [];
+  const socials = AddAvailableSocial(meta, onClose) ?? [];
 
   return [
     {
@@ -51,7 +51,7 @@ export default function ActionSheetController(
 
 // ----------------------------------------------------------------------
 
-function addAvailableSocial(meta: ActionMetaProps, onClose: VoidFunction) {
+function AddAvailableSocial(meta: ActionMetaProps, onClose: VoidFunction) {
   const [apps, setApps] = useState<string[]>([]);
 
   useEffect(() => {

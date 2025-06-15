@@ -16,7 +16,6 @@ import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 // auth
-import { GuestGuard } from "@/auth/guard";
 import { AuthProvider, AuthConsumer } from "@/auth/context";
 // hooks
 import { useColorScheme } from "@/hooks/use-color-scheme";

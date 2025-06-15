@@ -49,11 +49,9 @@ export default function ProfileView() {
         API_ENDPOINTS.landlord.get(id as string)
       );
 
-      const postsResponse = await axios.get(API_ENDPOINTS.post.search, {
-        params: {
-          userId: id,
-        },
-      });
+      const postsResponse = await axios.get(
+        API_ENDPOINTS.post.get(id as string)
+      );
 
       const user: UserLandlordResponse = userResponse.data;
 

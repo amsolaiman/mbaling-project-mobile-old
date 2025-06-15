@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
 import { KeyboardAvoidingView, Platform } from "react-native";
 // hooks
 import { useThemeColor } from "./use-theme-color";
@@ -6,7 +6,6 @@ import { useThemeColor } from "./use-theme-color";
 import SpinnerOverlay from "../spinner-overlay";
 //
 import { DefaultViewProps } from "./types";
-
 // ----------------------------------------------------------------------
 
 const View = forwardRef<KeyboardAvoidingView, DefaultViewProps>(

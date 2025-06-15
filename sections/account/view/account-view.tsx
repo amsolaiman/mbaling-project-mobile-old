@@ -1,8 +1,6 @@
 import { ScrollView, StyleSheet } from "react-native";
 // auth
 import { useAuthContext } from "@/auth/hooks";
-// components
-import { View } from "@/components/custom-native";
 //
 import { UserInfoSection } from "@/sections/_common";
 import AccountStudentDisplay from "../account-student-display";

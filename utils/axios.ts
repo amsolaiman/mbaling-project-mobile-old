@@ -32,6 +32,7 @@ export const API_ENDPOINTS = {
   },
   post: {
     list: "/api/post/list",
+    get: (id: string) => `/api/post/user?id=${id}`,
     search: "/api/post/search",
   },
 };

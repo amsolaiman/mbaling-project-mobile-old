@@ -1,5 +1,3 @@
-import { lowerCase } from "lodash";
-//
 import { _mock } from "./_mock";
 import { _users } from "./_user";
 import { randomNumberRange } from "./funcs";

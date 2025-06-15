@@ -1,9 +1,12 @@
-import { Link, Stack } from "expo-router";
+import React from "react";
 import { StyleSheet } from "react-native";
+// @expo
+import { Link, Stack } from "expo-router";
+// theme
+import Colors from "@/theme/Colors";
 // components
 import { LogoVertical } from "@/components/logo";
 import { Text, View } from "@/components/custom-native";
-import Colors from "@/theme/Colors";
 
 export default function NotFoundScreen() {
   return (

@@ -13,29 +13,26 @@ const Button = forwardRef<View, DefaultButtonProps>((props, ref) => {
   const { style, variant = "contained", label, ...other } = props;
 
   return (
-    <View ref={ref}>
-      <DefaultButton
-        onPress={() => {}}
-        style={[styles.button, style]}
-        //
-        mode={variant}
-        labelStyle={styles.buttonLabel}
-        {...other}
+    <DefaultButton
+      style={[styles.button, style]}
+      //
+      mode={variant}
+      labelStyle={styles.buttonLabel}
+      {...other}
+    >
+      <Text
+        style={[
+          styles.text,
+          {
+            ...(variant === "outlined" && {
+              color: Colors.primary,
+            }),
+          },
+        ]}
       >
-        <Text
-          style={[
-            styles.text,
-            {
-              ...(variant === "outlined" && {
-                color: Colors.primary,
-              }),
-            },
-          ]}
-        >
-          {label}
-        </Text>
-      </DefaultButton>
-    </View>
+        {label}
+      </Text>
+    </DefaultButton>
   );
 });
 
